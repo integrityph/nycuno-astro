@@ -1,1 +1,54 @@
+
 @import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap");
+
+@theme {
+  --color-brand: #e7ca17;
+  --color-brand-hover: #8b7a0e;
+  --color-brand-nav: #f9d117;
+  --color-brand-light: #fdfae8;
+
+  --color-page: #ffffff;
+  --color-surface: #f8f8f8;
+  --color-text: #111111;
+  --color-text-muted: #757575;
+  --color-border: #e5e5e5;
+
+  --font-sans: "Poppins", Arial, sans-serif;
+  --font-heading: "Oswald", "Poppins", sans-serif;
+
+  --container-site: 1310px;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-page);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
