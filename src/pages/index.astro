@@ -1,16 +1,33 @@
 ---
+import '../styles/global.css';
+
+const title = 'NYCUNO';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="NYCUNO — explore our transportation services."
+    />
+  </head>
+
+  <body class="min-h-screen bg-white text-gray-900 antialiased">
+    <main class="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 text-center">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+        NYCUNO
+      </p>
+
+      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
+        A new foundation.
+      </h1>
+
+      <p class="mt-5 max-w-xl text-base leading-7 text-gray-600 sm:text-lg">
+        Rebuilding the NYCUNO website with Astro and Tailwind CSS.
+      </p>
+    </main>
+  </body>
 </html>
