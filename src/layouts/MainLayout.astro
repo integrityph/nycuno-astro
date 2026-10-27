@@ -1,6 +1,6 @@
-
 ---
 import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
 
 interface Props {
   title: string;
@@ -30,5 +30,6 @@ const {
 
   <body class="min-h-screen">
     <slot />
+    <SiteFooter />
   </body>
 </html>
