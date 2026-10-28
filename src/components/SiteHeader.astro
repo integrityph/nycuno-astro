@@ -1,9 +1,9 @@
 ---
 const navLinks = [
-  { label: 'Home', href: '/index.html' },
-  { label: 'About Us', href: '/AboutUs.html' },
-  { label: 'Contact Us', href: '/ContactUs.html' },
-  { label: 'Downloads', href: '/DownloadApps.html' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/AboutUs' },
+  { label: 'Contact Us', href: '/ContactUs' },
+  { label: 'Downloads', href: '/DownloadApps' },
 ];
 
 interface Props {
@@ -15,14 +15,14 @@ const { currentPage = 'Home' } = Astro.props;
 
 <header class="sticky top-0 z-50 border-b border-border bg-white shadow-sm">
   <nav
-    class="mx-auto flex min-h-[76px] max-w-site items-center justify-between px-4 sm:px-6"
+    class="mx-auto flex h-[76px] max-w-site items-center justify-between px-4 sm:px-6"
     aria-label="Main navigation"
   >
-    <a href="/index.html" class="flex shrink-0 items-center" aria-label="NYCUNO home">
+    <a href="/" class="flex shrink-0 items-center" aria-label="NYCUNO home">
       <img
         src="/images/nycuno-logo.png"
         alt="NYCUNO"
-        class="h-12 w-[150px] object-contain sm:w-[190px]"
+        class="h-[56px] w-auto object-contain"
       />
     </a>
 

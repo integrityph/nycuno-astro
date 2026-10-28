@@ -1,0 +1,47 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+---
+
+<MainLayout 
+  title="Contact Us" 
+  description="Contact NYCUNO" 
+  currentPage="Contact Us"
+>
+  <main class="mx-auto w-full max-w-site flex-1 px-4 py-[50px] sm:px-6">
+    <!-- Page heading -->
+    <section>
+      <h1
+        class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-none text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
+      >
+        Contact Us
+      </h1>
+    </section>
+
+    <!-- Contact details -->
+    <section class="grid gap-8 sm:grid-cols-2">
+      <div class="space-y-3">
+        <h2 class="text-lg font-semibold text-text">Address</h2>
+
+        <address class="text-[15px] leading-[26px] not-italic text-[#404040]">
+          <span aria-hidden="true">📍</span>
+          1389 Hempstead Turnpike, Suite E, Elmont, NY 11003
+        </address>
+      </div>
+
+      <div class="space-y-3">
+        <h2 class="text-lg font-semibold text-text">Phone &amp; Email</h2>
+
+        <p class="text-[15px] leading-[26px] text-[#404040]">
+          <span aria-hidden="true">☎</span>
+          <a
+            href="tel:+15166070924"
+            class="transition-colors hover:text-brand-hover"
+          >
+            +1(516) 6070924
+          </a>
+        </p>
+      </div>
+    </section>
+  </main>
+</MainLayout>

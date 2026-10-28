@@ -1,0 +1,79 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Download NYCUNO App"
+  description="Download the NYCUNO app for convenient and reliable transportation services."
+  currentPage="Downloads"
+>
+  <main class="mx-auto w-full max-w-site flex-1 px-4 py-12.5 sm:px-6">
+    <section
+      class="grid items-start gap-10 md:grid-cols-2 md:gap-12"
+    >
+      <div>
+        <h1
+          class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-tight text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
+        >
+          Download NYC UNO App
+        </h1>
+
+        <p class="text-[15px] font-normal leading-[26px] text-[#404040]">
+          Experience seamless urban mobility. Download NYC UNO app today to
+          get started with convenient and reliable transportation services
+          right at your fingertips. Get more out of your city.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href="https://apps.apple.com/us/app/nycuno-user/id6742632408"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download NYCUNO on the App Store"
+          >
+            <img
+              src="/images/ios-store.svg"
+              alt="Download on the App Store"
+              class="h-12 w-auto"
+            />
+          </a>
+
+          <a
+            href="https://play.google.com/store/apps/details?id=com.nycuno.user"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Get NYCUNO on Google Play"
+          >
+            <img
+              src="/images/google-play.svg"
+              alt="Get it on Google Play"
+              class="h-12 w-auto"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="relative flex min-h-[360px] w-full items-center justify-center
+              overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat
+              px-4 py-8 sm:min-h-[420px]"
+        style="background-image: url('/assets/img/downloads/pexels-mcraftpix-21014.jpg')"
+      >
+        <!-- Yellow overlay from the legacy design -->
+        <div
+          class="absolute inset-0 z-10 rounded-xl bg-[#e7ca17]/50"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Keep the phone mockup above the background and overlay -->
+        <img
+          src="/assets/img/downloads/iMockup - Samsung S20.png"
+          alt="NYCUNO app displayed on a Samsung Galaxy S20"
+          class="relative z-20 h-auto w-[148px] rounded-2xl
+                shadow-[7px_7px_12px_3px_rgba(0,0,0,0.41)]"
+          loading="lazy"
+        />
+      </div>
+    </section>
+  </main>
+</MainLayout>

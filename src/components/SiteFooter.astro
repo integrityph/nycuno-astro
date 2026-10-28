@@ -1,3 +1,12 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+console.log("currentPage:", currentPage);
+---
+
 <!-- Footer -->
 <footer class="bg-black text-[#878787]">
   <!-- Footer Main -->
@@ -8,32 +17,66 @@
         <h2 class="mb-5 text-xl font-semibold text-white">Quick Links</h2>
         <ul class="space-y-3">
           <li>
-            <a href="/Legal.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
-              Legal
-            </a>
+            <a 
+              href="/Legal.html"
+              class:list={[
+                "footer-link",
+                currentPage === "Legal" && "footer-link-active",
+              ]}
+            >Legal</a>
           </li>
           <li>
-            <a href="/Terms-Conditions.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/TermsConditions.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "Terms & Conditions" && "footer-link-active",
+              ]}
+            >
               Terms &amp; Conditions
             </a>
           </li>
           <li>
-            <a href="/HowItWorks.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/HowItWorks.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "How It Works" && "footer-link-active",
+              ]}
+            >
               How It Works
             </a>
           </li>
           <li>
-            <a href="/TrustSafety.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/TrustSafety.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "Trust, Safety & Insurance" && "footer-link-active",
+              ]}
+            >
               Trust, Safety &amp; Insurance
             </a>
           </li>
           <li>
-            <a href="/PrivacyPolicy.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/PrivacyPolicy.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "Privacy Policy" && "footer-link-active",
+              ]}
+            >
               Privacy Policy
             </a>
           </li>
           <li>
-            <a href="/AboutUs.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/AboutUs.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "About Us" && "footer-link-active",
+              ]}
+            >
               About Us
             </a>
           </li>
@@ -45,12 +88,24 @@
         <h2 class="mb-5 text-xl font-semibold text-white">Support</h2>
         <ul class="space-y-3">
           <li>
-            <a href="/HelpCenter.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/HelpCenter.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "Help Center" && "footer-link-active",
+              ]}
+            >
               Help Center
             </a>
           </li>
           <li>
-            <a href="/ContactUs.html" class="text-sm text-[#dadada] transition-colors hover:text-white">
+            <a 
+              href="/ContactUs.html" 
+              class:list={[
+                "footer-link",
+                currentPage === "Contact Us" && "footer-link-active",
+              ]}
+            >
               Contact Us
             </a>
           </li>
@@ -74,7 +129,7 @@
             aria-label="Download NYC Uno from the Apple App Store"
           >
             <img
-              src="/Home_files/ios-store.svg"
+              src="/images/ios-store.svg"
               alt="Download on the App Store"
               class="w-[203px] max-w-full"
               loading="lazy"
@@ -88,7 +143,7 @@
             aria-label="Get NYC Uno on Google Play"
           >
             <img
-              src="/Home_files/google-play.svg"
+              src="/images/google-play.svg"
               alt="Get it on Google Play"
               class="w-[203px] max-w-full"
               loading="lazy"
