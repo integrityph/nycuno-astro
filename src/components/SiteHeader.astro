@@ -29,19 +29,28 @@ const { currentPage = 'Home' } = Astro.props;
     <button
       id="menu-toggle"
       type="button"
-      class="flex size-11 flex-col items-center justify-center gap-1.5 rounded-md border border-border md:hidden"
+      class="flex size-11 flex-col items-center justify-center gap-1.5
+            rounded-md border border-border min-[1199px]:hidden"
       aria-label="Open navigation menu"
       aria-controls="site-navigation"
       aria-expanded="false"
     >
-      <span class="h-0.5 w-5 bg-black"></span>
-      <span class="h-0.5 w-5 bg-black"></span>
-      <span class="h-0.5 w-5 bg-black"></span>
+      <span class="menu-line menu-line-top h-0.5 w-5 bg-brand"></span>
+      <span class="menu-line menu-line-middle h-0.5 w-5 bg-brand"></span>
+      <span class="menu-line menu-line-bottom h-0.5 w-5 bg-brand"></span>
     </button>
 
     <ul
       id="site-navigation"
-      class="absolute left-0 right-0 top-full hidden flex-col border-b border-border bg-white shadow-md md:static md:flex md:flex-row md:items-center md:gap-1 md:border-0 md:shadow-none"
+      class="absolute left-1/2 top-full z-50 w-screen
+            -translate-x-1/2 overflow-hidden
+            max-h-0 opacity-0
+            border-b border-border bg-white shadow-md
+            transition-[max-height,opacity] duration-300 ease-in-out
+            md:static md:flex md:w-auto md:translate-x-0
+            md:max-h-none md:flex-row md:items-center
+            md:overflow-visible md:opacity-100
+            md:border-0 md:shadow-none"
     >
       {navLinks.map((link) => (
         <li>
@@ -67,16 +76,33 @@ const { currentPage = 'Home' } = Astro.props;
   const toggle = document.querySelector<HTMLButtonElement>('#menu-toggle');
   const navigation = document.querySelector<HTMLUListElement>('#site-navigation');
 
-  toggle?.addEventListener('click', () => {
-    if (!navigation) return;
+  function setMenuOpen(isOpen: boolean) {
+    if (!toggle || !navigation) return;
 
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-
-    toggle.setAttribute('aria-expanded', String(!isExpanded));
+    toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute(
       'aria-label',
-      isExpanded ? 'Open navigation menu' : 'Close navigation menu',
+      isOpen ? 'Close navigation menu' : 'Open navigation menu',
     );
-    navigation.classList.toggle('hidden', isExpanded);
+
+    navigation.classList.toggle('max-h-0', !isOpen);
+    navigation.classList.toggle('max-h-[320px]', isOpen);
+    navigation.classList.toggle('opacity-0', !isOpen);
+    navigation.classList.toggle('opacity-100', isOpen);
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    setMenuOpen(!isOpen);
+  });
+
+  navigation?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  const desktopMedia = window.matchMedia('(min-width: 1199px)');
+
+  desktopMedia.addEventListener('change', (event) => {
+    if (event.matches) setMenuOpen(false);
   });
 </script>

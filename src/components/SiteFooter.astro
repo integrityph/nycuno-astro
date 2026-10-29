@@ -1,10 +1,10 @@
 ---
+import SocialLinks from './SocialLinks.astro';
 interface Props {
   currentPage?: string;
 }
 
 const { currentPage = "" } = Astro.props;
-console.log("currentPage:", currentPage);
 ---
 
 <!-- Footer -->
@@ -18,7 +18,7 @@ console.log("currentPage:", currentPage);
         <ul class="space-y-3">
           <li>
             <a 
-              href="/Legal.html"
+              href="/Legal"
               class:list={[
                 "footer-link",
                 currentPage === "Legal" && "footer-link-active",
@@ -27,7 +27,7 @@ console.log("currentPage:", currentPage);
           </li>
           <li>
             <a 
-              href="/TermsConditions.html" 
+              href="/TermsConditions" 
               class:list={[
                 "footer-link",
                 currentPage === "Terms & Conditions" && "footer-link-active",
@@ -38,7 +38,7 @@ console.log("currentPage:", currentPage);
           </li>
           <li>
             <a 
-              href="/HowItWorks.html" 
+              href="/HowItWorks" 
               class:list={[
                 "footer-link",
                 currentPage === "How It Works" && "footer-link-active",
@@ -49,7 +49,7 @@ console.log("currentPage:", currentPage);
           </li>
           <li>
             <a 
-              href="/TrustSafety.html" 
+              href="/TrustSafety" 
               class:list={[
                 "footer-link",
                 currentPage === "Trust, Safety & Insurance" && "footer-link-active",
@@ -60,7 +60,7 @@ console.log("currentPage:", currentPage);
           </li>
           <li>
             <a 
-              href="/PrivacyPolicy.html" 
+              href="/PrivacyPolicy" 
               class:list={[
                 "footer-link",
                 currentPage === "Privacy Policy" && "footer-link-active",
@@ -71,7 +71,7 @@ console.log("currentPage:", currentPage);
           </li>
           <li>
             <a 
-              href="/AboutUs.html" 
+              href="/AboutUs" 
               class:list={[
                 "footer-link",
                 currentPage === "About Us" && "footer-link-active",
@@ -89,7 +89,7 @@ console.log("currentPage:", currentPage);
         <ul class="space-y-3">
           <li>
             <a 
-              href="/HelpCenter.html" 
+              href="/HelpCenter" 
               class:list={[
                 "footer-link",
                 currentPage === "Help Center" && "footer-link-active",
@@ -100,7 +100,7 @@ console.log("currentPage:", currentPage);
           </li>
           <li>
             <a 
-              href="/ContactUs.html" 
+              href="/ContactUs" 
               class:list={[
                 "footer-link",
                 currentPage === "Contact Us" && "footer-link-active",
@@ -114,14 +114,10 @@ console.log("currentPage:", currentPage);
 
       <!-- Be Social -->
       <div>
-        <h2 class="mb-5 text-xl font-semibold text-white">Be Social</h2>
-
-        <p class="max-w-sm text-sm leading-6">
-          Follow NYC Uno and stay connected with our latest updates.
-        </p>
+        <SocialLinks />
 
         <!-- App Store Links -->
-        <div class="mt-6 flex flex-col items-start gap-4">
+        <div class="mt-6 flex flex-col lg:flex-row items-start gap-4">
           <a
             href="https://apps.apple.com/us/app/nycuno-user/id6742632408"
             target="_blank"

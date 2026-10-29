@@ -1,19 +1,16 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import SiteHeader from "../components/SiteHeader.astro";
 ---
 
-<MainLayout 
-  title="Contact Us" 
-  description="Contact NYCUNO" 
-  currentPage="Contact Us"
->
+<MainLayout
+  title="Contact Us"
+  description="Contact NYCUNO"
+  currentPage="Contact Us">
   <main class="mx-auto w-full max-w-site flex-1 px-4 py-[50px] sm:px-6">
     <!-- Page heading -->
     <section>
       <h1
-        class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-none text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
-      >
+        class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-none text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand">
         Contact Us
       </h1>
     </section>
@@ -21,26 +18,80 @@ import SiteHeader from "../components/SiteHeader.astro";
     <!-- Contact details -->
     <section class="grid gap-8 sm:grid-cols-2">
       <div class="space-y-3">
-        <h2 class="text-lg font-semibold text-text">Address</h2>
+        <h2 class="text-lg font-semibold text-text" data-reveal="up">
+          Address
+        </h2>
 
-        <address class="text-[15px] leading-[26px] not-italic text-[#404040]">
-          <span aria-hidden="true">📍</span>
-          1389 Hempstead Turnpike, Suite E, Elmont, NY 11003
-        </address>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=1389+Hempstead+Turnpike%2C+Suite+E%2C+Elmont%2C+NY+11003"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-start gap-2 text-base leading-[26px] text-[#404040] transition-colors hover:text-brand"
+          data-reveal="up">
+          <svg
+            class="mt-1 size-4 shrink-0"
+            viewBox="0 0 64 64"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
+            ></path>
+          </svg>
+
+          <span> 1389 Hempstead Turnpike, Suite E, Elmont, NY 11003 </span>
+        </a>
       </div>
 
       <div class="space-y-3">
-        <h2 class="text-lg font-semibold text-text">Phone &amp; Email</h2>
+        <h2 class="text-lg font-semibold text-text" data-reveal="up">
+          Phone &amp; Email
+        </h2>
 
-        <p class="text-[15px] leading-[26px] text-[#404040]">
-          <span aria-hidden="true">☎</span>
-          <a
-            href="tel:+15166070924"
-            class="transition-colors hover:text-brand-hover"
+        <a
+          href="tel:+15166070924"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-start gap-2 text-base leading-[26px] text-[#404040] transition-colors hover:text-brand"
+          data-reveal="up">
+          <svg
+            class="mt-1 size-4 shrink-0"
+            viewBox="0 0 15 15"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            fill="#000000"
+            stroke="#000000"
+            ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+              <title>call [#192]</title>
+              <desc>Created with Sketch.</desc>
+              <defs> </defs>
+              <g
+                id="Page-1"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd">
+                <g
+                  id="Dribbble-Light-Preview"
+                  transform="translate(-103.000000, -7321.000000)"
+                  fill="currentColor">
+                  <g id="icons" transform="translate(56.000000, 160.000000)">
+                    <path
+                      fill="currentColor"
+                      d="M61.7302966,7173.99596 C61.2672966,7175.40296 59.4532966,7176.10496 58.1572966,7175.98796 C56.3872966,7175.82796 54.4612966,7174.88896 52.9992966,7173.85496 C50.8502966,7172.33496 48.8372966,7169.98396 47.6642966,7167.48896 C46.8352966,7165.72596 46.6492966,7163.55796 47.8822966,7161.95096 C48.3382966,7161.35696 48.8312966,7161.03996 49.5722966,7161.00296 C50.6002966,7160.95296 50.7442966,7161.54096 51.0972966,7162.45696 C51.3602966,7163.14196 51.7112966,7163.84096 51.9072966,7164.55096 C52.2742966,7165.87596 50.9912966,7165.93096 50.8292966,7167.01396 C50.7282966,7167.69696 51.5562966,7168.61296 51.9302966,7169.09996 C52.6632966,7170.05396 53.5442966,7170.87696 54.5382966,7171.50296 C55.1072966,7171.86196 56.0262966,7172.50896 56.6782966,7172.15196 C57.6822966,7171.60196 57.5872966,7169.90896 58.9912966,7170.48196 C59.7182966,7170.77796 60.4222966,7171.20496 61.1162966,7171.57896 C62.1892966,7172.15596 62.1392966,7172.75396 61.7302966,7173.99596 C61.4242966,7174.92396 62.0362966,7173.06796 61.7302966,7173.99596"
+                      id="call-[#192]">
+                    </path>
+                  </g>
+                </g>
+              </g>
+            </g></svg
           >
-            +1(516) 6070924
-          </a>
-        </p>
+          <span> +1(516) 6070924 </span>
+        </a>
       </div>
     </section>
   </main>

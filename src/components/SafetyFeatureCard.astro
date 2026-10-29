@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<article 
+  class="group flex items-start gap-4 rounded-xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-200 hover:shadow-md sm:gap-5 sm:p-6"
+  data-reveal="up"
+>
+  <div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-brand sm:size-14">
+    <img
+      src={icon}
+      alt=""
+      aria-hidden="true"
+      class="size-7 object-contain sm:size-8"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="min-w-0 flex-1">
+    <h3 class="mb-2 text-lg font-semibold leading-snug text-black sm:text-xl">
+      {title}
+    </h3>
+    <p class="text-sm leading-6 text-text-muted sm:text-base sm:leading-7">
+      {description}
+    </p>
+  </div>
+</article>

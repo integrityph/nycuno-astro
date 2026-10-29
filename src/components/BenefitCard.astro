@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  iconAlt?: string;
+}
+
+const { title, description, icon, iconAlt = '' } = Astro.props;
+---
+
+<article class="flex h-full flex-col items-center rounded-xl bg-white p-6 text-center transition-shadow duration-300 hover:shadow-lg shadow-[0_0_4px_rgba(0,0,0,0.2)]" data-reveal="up">
+  <div class="mb-4 flex size-14 shrink-0 items-center justify-center rounded-full bg-[#ffd44a]">
+    <img
+      src={icon}
+      alt={iconAlt}
+      aria-hidden={iconAlt === ''}
+      class="size-8"
+      loading="lazy"
+    />
+  </div>
+
+  <h3 class="mb-3 text-xl font-semibold leading-snug text-black sm:text-2xl">
+    {title}
+  </h3>
+
+  <p class="text-base leading-6 text-[#808080]">
+    {description}
+  </p>
+</article>

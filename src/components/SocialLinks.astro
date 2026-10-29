@@ -1,0 +1,69 @@
+---
+const socialLinks = [
+  {
+    name: 'Facebook',
+    icon: 'facebook',
+    href: 'https://www.facebook.com/',
+  },
+  {
+    name: 'Instagram',
+    icon: 'instagram',
+    href: 'https://www.instagram.com/',
+  },
+  {
+    name: 'X',
+    icon: 'x',
+    href: 'https://x.com/',
+  },
+  {
+    name: 'YouTube',
+    icon: 'youtube',
+    href: 'https://www.youtube.com/',
+  },
+  {
+    name: 'LinkedIn',
+    icon: 'linkedin',
+    href: 'https://www.linkedin.com/',
+  },
+  {
+    name: 'TikTok',
+    icon: 'tiktok',
+    href: 'https://www.tiktok.com/',
+  },
+];
+---
+
+<div>
+  <h3 class="mb-2 text-lg font-semibold text-white">
+    Be Social
+  </h3>
+  <p class="max-w-sm text-sm leading-6 mb-4">
+    Follow NYC Uno and stay connected with our latest updates.
+  </p>
+
+  <ul class="flex flex-wrap items-center gap-4">
+    {socialLinks.map((social) => (
+      <li>
+        <a
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit NYCUNO on ${social.name}`}
+          title={social.name}
+          class="flex size-9 items-center justify-center rounded-full
+                transition-opacity hover:opacity-70
+                focus-visible:outline-2 focus-visible:outline-offset-4
+                focus-visible:outline-white"
+        >
+          <img
+            src={`/images/social/${social.icon}.svg`}
+            alt=""
+            aria-hidden="true"
+            class="size-5 object-contain"
+            loading="lazy"
+          />
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

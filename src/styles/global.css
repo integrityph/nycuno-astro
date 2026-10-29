@@ -49,7 +49,7 @@ select {
 
 @layer components {
   .footer-link {
-    @apply relative inline-block text-[15px] font-normal text-[#dadada]
+    @apply relative inline-block text-base font-normal text-[#dadada]
       opacity-100 transition-all duration-500;
   }
 
@@ -68,5 +68,53 @@ select {
   .footer-link:hover::after,
   .footer-link-active::after {
     @apply w-full;
+  }
+}
+
+/* Mobile navigation hamburger animation */
+.menu-line {
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease;
+}
+
+#menu-toggle[aria-expanded="true"] .menu-line-top {
+  transform: translateY(8px) rotate(45deg);
+}
+
+#menu-toggle[aria-expanded="true"] .menu-line-middle {
+  opacity: 0;
+}
+
+#menu-toggle[aria-expanded="true"] .menu-line-bottom {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-line {
+    transition: none;
+  }
+}
+
+/* Scroll reveal: fade up */
+.reveal-ready [data-reveal="up"] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease;
+}
+
+.reveal-ready [data-reveal="up"].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect the visitor's motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal="up"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

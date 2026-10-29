@@ -1,0 +1,46 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  location: string;
+}
+
+const { quote, name, location } = Astro.props;
+---
+
+<article
+  class="flex h-full flex-col rounded-xl bg-white p-6 shadow-[0_0_4px_rgba(0,0,0,0.2)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)] sm:p-7"
+  data-reveal="up"
+>
+  <!-- Rating -->
+  <div
+    class="mb-4 flex gap-1"
+    role="img"
+    aria-label="5 out of 5 stars"
+  >
+    {Array.from({ length: 5 }, (_, i) => (
+      <img
+        src="/assets/img/icon/shaded-star.svg"
+        alt=""
+        aria-hidden="true"
+        class="size-5 shrink-0"
+        loading="lazy"
+      />
+    ))}
+  </div>
+
+  <!-- Quote -->
+  <blockquote class="mb-6 flex-1 font-sans text-base font-medium italic leading-7 text-[#171a1f] sm:text-lg sm:leading-8">
+    “{quote}”
+  </blockquote>
+
+  <!-- Rider -->
+  <footer class="mt-auto border-t border-gray-100 pt-4">
+    <p class="font-semibold text-[#171a1f]">
+      {name}
+    </p>
+    <p class="mt-1 text-sm text-text-muted">
+      {location}
+    </p>
+  </footer>
+</article>
