@@ -6,30 +6,32 @@ import RideOptionCard from '@/components/RideOptionCard.astro';
 import TestimonialCard from '@/components/TestimonialCard.astro';
 import SafetyFeatureCard from '@/components/SafetyFeatureCard.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const benefits = [
   {
     title: 'Affordable Rides',
     description:
       "Get where you need to be without stretching your budget, while enjoying a service designed for convenience and value. Smart journeys don't have to cost more.",
-    icon: '/assets/img/icon/lucide-DollarSign-Outlined-Black.svg',
+    icon: 'assets/img/icon/lucide-DollarSign-Outlined-Black.svg',
   },
   {
     title: 'Complete Transparency',
     description:
       'No hidden peaks. No secret cuts. Every dollar is accounted for, visible to both rider and driver, ensuring fairness and trust in every trip.',
-    icon: '/assets/img/icon/search.svg',
+    icon: 'assets/img/icon/search.svg',
   },
   {
     title: 'Safe & Secure',
     description:
       'Trips where your peace of mind comes first. With verified drivers and support, you can travel knowing every journey is protected and help is always within reach.',
-    icon: '/assets/img/icon/guard-check.svg',
+    icon: 'assets/img/icon/guard-check.svg',
   },
   {
     title: 'Eco-Friendly Options',
     description:
       "With available green rides in our fleet, you'll reduce your carbon footprint while still enjoying convenient rides. Travel smarter and greener with us.",
-    icon: '/assets/img/icon/leaf.svg',
+    icon: 'assets/img/icon/leaf.svg',
   },
 ];
 
@@ -38,19 +40,19 @@ const services = [
     title: 'Book a Ride',
     description:
       'Instantly find and book a ride to your destination with just a few taps. Fast, efficient, and always available.',
-    icon: '/assets/img/icon/car2ddd.svg',
+    icon: 'assets/img/icon/car2ddd.svg',
   },
   {
     title: 'Book for Someone Else',
     description:
       "Easily arrange transportation for friends, family, or clients from your account, even if they don't have the app.",
-    icon: '/assets/img/icon/lucide-Users-Outlined.svg',
+    icon: 'assets/img/icon/lucide-Users-Outlined.svg',
   },
   {
     title: 'Schedule a Ride',
     description:
       "Plan ahead and schedule your rides for a specific date and time, ensuring you're never late for an important event.",
-    icon: '/assets/img/icon/lucide-CalendarDays-Outlined.svg',
+    icon: 'assets/img/icon/lucide-CalendarDays-Outlined.svg',
   },
 ];
 
@@ -58,28 +60,28 @@ const rideOptions = [
   {
     title: 'Standard',
     description: 'Your everyday affordable ride for getting around town.',
-    icon: '/assets/img/icon/taxi.svg',
+    icon: 'assets/img/icon/taxi.svg',
   },
   {
     title: 'XL',
     description: 'Need more space? Perfect for groups or extra luggage.',
-    icon: '/assets/img/icon/car2ddd.svg',
+    icon: 'assets/img/icon/car2ddd.svg',
   },
   {
     title: 'Green',
     description: 'Travel green with our selection of electric and hybrid vehicles.',
-    icon: '/assets/img/icon/leaf.svg',
+    icon: 'assets/img/icon/leaf.svg',
   },
   {
     title: 'Comfort',
     description: 'Premium service for when you want to ride in style and comfort.',
-    icon: '/assets/img/icon/car.svg',
+    icon: 'assets/img/icon/car.svg',
   },
   {
     title: 'Executive',
     description:
       'Experience top-class comfort with high-end vehicles and professional drivers for the ultimate ride.',
-    icon: '/assets/img/icon/lucide-Gem-Outlined.svg',
+    icon: 'assets/img/icon/lucide-Gem-Outlined.svg',
   },
 ];
 
@@ -106,25 +108,25 @@ const safetyFeatures = [
     title: 'SOS Button',
     description:
       'Quick access to emergency services directly from the app.',
-    icon: '/assets/img/icon/phone.svg',
+    icon: 'assets/img/icon/phone.svg',
   },
   {
     title: 'Driver Verification',
     description:
       'All drivers undergo thorough background checks for your peace of mind.',
-    icon: '/assets/img/icon/lucide-UserCheck-Outlined.svg',
+    icon: 'assets/img/icon/lucide-UserCheck-Outlined.svg',
   },
   {
     title: 'Contact Sharing',
     description:
       'Share your trip details with trusted contacts in real-time.',
-    icon: '/assets/img/icon/lucide-Share2-Outlined.svg',
+    icon: 'assets/img/icon/lucide-Share2-Outlined.svg',
   },
   {
     title: '24/7 In-App Chat & Hotline',
     description:
       'Assistance is always just a tap or call away, day or night.',
-    icon: '/assets/img/icon/lucide-MessageCircle-Outlined.svg',
+    icon: 'assets/img/icon/lucide-MessageCircle-Outlined.svg',
   },
 ];
 ---
@@ -140,7 +142,7 @@ const safetyFeatures = [
       <!-- Desktop background -->
       <div class="absolute inset-0 -z-20 hidden lg:block">
         <img
-          src="/assets/img/home/nycuno-landing-img1.jpg"
+          src={`${base}assets/img/home/nycuno-landing-img1.jpg`}
           alt=""
           aria-hidden="true"
           fetchpriority="high"
@@ -157,7 +159,7 @@ const safetyFeatures = [
       <!-- Mobile background image -->
       <div class="relative h-[45vw] min-h-45 max-h-110 lg:hidden">
         <img
-          src="/assets/img/home/nycuno-landing-img1.jpg"
+          src={`${base}assets/img/home/nycuno-landing-img1.jpg`}
           alt=""
           aria-hidden="true"
           fetchpriority="high"
@@ -189,7 +191,7 @@ const safetyFeatures = [
         <!-- Promotional image -->
         <div class="mx-auto w-full max-w-[440px] lg:mx-0 lg:max-w-[650px] lg:flex-1" data-reveal="up">
           <img
-            src="/assets/img/NYC_UNO-5_OFF_d1_v1.jpg"
+            src={`${base}assets/img/NYC_UNO-5_OFF_d1_v1.jpg`}
             alt="NYC UNO promotional offer"
             class="h-auto w-full object-contain"
           />
@@ -235,10 +237,11 @@ const safetyFeatures = [
           <!-- Step 1: Download & Sign Up -->
           <article class="flex w-full max-w-[363px] flex-col items-center text-center" data-reveal="up">
             <div
-              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-[url('/assets/img/bg-yellow.jpg')] bg-cover bg-center p-4"
+              style={`background-image: url("${base}assets/img/bg-yellow.jpg")`}
+              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
             >
               <img
-                src="/assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro.png"
+                src={`${base}assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro.png`}
                 alt="NYCUNO app displayed on a Google Pixel phone"
                 loading="lazy"
                 class="size-full object-contain"
@@ -258,10 +261,11 @@ const safetyFeatures = [
           <!-- Step 2: Book Your Ride -->
           <article class="flex w-full max-w-[363px] flex-col items-center text-center" data-reveal="up">
             <div
-              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-[url('/assets/img/bg-yellow.jpg')] bg-cover bg-center p-4"
+              style={`background-image: url("${base}assets/img/bg-yellow.jpg")`}
+              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
             >
               <img
-                src="/assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro%20front.png"
+                src={`${base}assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro%20front.png`}
                 alt="NYCUNO ride booking screen displayed on a phone"
                 loading="lazy"
                 class="size-full object-contain"
@@ -284,10 +288,11 @@ const safetyFeatures = [
             data-reveal="up"
           >
             <div
-              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-[url('/assets/img/bg-yellow.jpg')] bg-cover bg-center p-4"
+            style={`background-image: url("${base}assets/img/bg-yellow.jpg")`}
+              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
             >
               <img
-                src="/assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro%20tilt.png"
+                src={`${base}assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro%20tilt.png`}
                 alt="NYCUNO app displayed on an angled phone mockup"
                 loading="lazy"
                 class="size-full object-contain"
@@ -358,7 +363,7 @@ const safetyFeatures = [
             <!-- Higher Commissions -->
             <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
               <img
-                src="/assets/img/icon/lucide-Gauge-Outlined.svg"
+                src={`${base}assets/img/icon/lucide-Gauge-Outlined.svg`}
                 alt=""
                 aria-hidden="true"
                 class="mb-4 size-[30px]"
@@ -375,7 +380,7 @@ const safetyFeatures = [
             <!-- Flexible Hours -->
             <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
               <img
-                src="/assets/img/icon/lucide-Clock-Outlined.svg"
+                src={`${base}assets/img/icon/lucide-Clock-Outlined.svg`}
                 alt=""
                 aria-hidden="true"
                 class="mb-4 size-[30px]"
@@ -392,7 +397,7 @@ const safetyFeatures = [
             <!-- Earnings Transparency -->
             <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
               <img
-                src="/assets/img/icon/lucide-DollarSign-Outlined.svg"
+                src={`${base}assets/img/icon/lucide-DollarSign-Outlined.svg`}
                 alt=""
                 aria-hidden="true"
                 class="mb-4 size-[30px]"
@@ -409,7 +414,7 @@ const safetyFeatures = [
             <!-- Dedicated Support -->
             <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
               <img
-                src="/assets/img/icon/lucide-ShieldCheck-Outlined.svg"
+                src={`${base}assets/img/icon/lucide-ShieldCheck-Outlined.svg`}
                 alt=""
                 aria-hidden="true"
                 class="mb-4 size-[30px]"
@@ -518,7 +523,7 @@ const safetyFeatures = [
             data-reveal="up"
           >
             <img
-              src="/nyc_img/pexels-cottonbro-4606338.jpg"
+              src={`${base}nyc_img/pexels-cottonbro-4606338.jpg`}
               alt="Rider registering for NYC Uno"
               class="aspect-[100/108.9] w-full object-cover object-center sm:aspect-video max-[630px]:aspect-[100/66.25]"
               loading="lazy"
@@ -545,7 +550,7 @@ const safetyFeatures = [
             data-reveal="up"
           >
             <img
-              src="/nyc_img/pexels-jeshoots-com-147458-13861.jpg"
+              src={`${base}nyc_img/pexels-jeshoots-com-147458-13861.jpg`}
               alt="Driver registering to drive with NYC Uno"
               class="aspect-[100/108.9] w-full object-cover object-center sm:aspect-video max-[630px]:aspect-[100/66.25]"
               loading="lazy"

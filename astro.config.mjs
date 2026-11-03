@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 
 export default defineConfig({
-  site: "https://organization.github.io",
+  site: "https://integrityph.github.io",
   base: "/nycuno-astro/",
   vite: {
     plugins: [tailwindcss()],

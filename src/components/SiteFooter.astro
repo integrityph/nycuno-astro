@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { currentPage = "" } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <!-- Footer -->
@@ -18,7 +19,7 @@ const { currentPage = "" } = Astro.props;
         <ul class="space-y-3">
           <li>
             <a 
-              href="/Legal"
+              href=`${base}Legal`
               class:list={[
                 "footer-link",
                 currentPage === "Legal" && "footer-link-active",
@@ -27,7 +28,7 @@ const { currentPage = "" } = Astro.props;
           </li>
           <li>
             <a 
-              href="/TermsConditions" 
+              href=`${base}TermsConditions` 
               class:list={[
                 "footer-link",
                 currentPage === "Terms & Conditions" && "footer-link-active",
@@ -38,7 +39,7 @@ const { currentPage = "" } = Astro.props;
           </li>
           <li>
             <a 
-              href="/HowItWorks" 
+              href=`${base}HowItWorks` 
               class:list={[
                 "footer-link",
                 currentPage === "How It Works" && "footer-link-active",
@@ -49,7 +50,7 @@ const { currentPage = "" } = Astro.props;
           </li>
           <li>
             <a 
-              href="/TrustSafety" 
+              href=`${base}TrustSafety`` 
               class:list={[
                 "footer-link",
                 currentPage === "Trust, Safety & Insurance" && "footer-link-active",
@@ -60,7 +61,7 @@ const { currentPage = "" } = Astro.props;
           </li>
           <li>
             <a 
-              href="/PrivacyPolicy" 
+              href=`${base}PrivacyPolicy` 
               class:list={[
                 "footer-link",
                 currentPage === "Privacy Policy" && "footer-link-active",
@@ -71,7 +72,7 @@ const { currentPage = "" } = Astro.props;
           </li>
           <li>
             <a 
-              href="/AboutUs" 
+              href=`${base}AboutUs` 
               class:list={[
                 "footer-link",
                 currentPage === "About Us" && "footer-link-active",
@@ -89,7 +90,7 @@ const { currentPage = "" } = Astro.props;
         <ul class="space-y-3">
           <li>
             <a 
-              href="/HelpCenter" 
+              href=`${base}HelpCenter` 
               class:list={[
                 "footer-link",
                 currentPage === "Help Center" && "footer-link-active",
@@ -100,7 +101,7 @@ const { currentPage = "" } = Astro.props;
           </li>
           <li>
             <a 
-              href="/ContactUs" 
+              href=`${base}ContactUs` 
               class:list={[
                 "footer-link",
                 currentPage === "Contact Us" && "footer-link-active",
@@ -125,7 +126,7 @@ const { currentPage = "" } = Astro.props;
             aria-label="Download NYC Uno from the Apple App Store"
           >
             <img
-              src="/images/ios-store.svg"
+              src={`${base}images/ios-store.svg`}
               alt="Download on the App Store"
               class="w-[203px] max-w-full"
               loading="lazy"
@@ -139,7 +140,7 @@ const { currentPage = "" } = Astro.props;
             aria-label="Get NYC Uno on Google Play"
           >
             <img
-              src="/images/google-play.svg"
+              src={`${base}images/google-play.svg`}
               alt="Get it on Google Play"
               class="w-[203px] max-w-full"
               loading="lazy"

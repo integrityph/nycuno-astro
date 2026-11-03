@@ -1,9 +1,11 @@
 ---
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/AboutUs' },
-  { label: 'Contact Us', href: '/ContactUs' },
-  { label: 'Downloads', href: '/DownloadApps' },
+  { label: 'Home', href: base },
+  { label: 'About Us', href: `${base}AboutUs` },
+  { label: 'Contact Us', href: `${base}ContactUs` },
+  { label: 'Downloads', href: `${base}DownloadApps` },
 ];
 
 interface Props {
@@ -20,7 +22,7 @@ const { currentPage = 'Home' } = Astro.props;
   >
     <a href="/" class="flex shrink-0 items-center" aria-label="NYCUNO home">
       <img
-        src="/images/nycuno-logo.png"
+        src={`${base}images/nycuno-logo.png`}
         alt="NYCUNO"
         class="h-[56px] w-auto object-contain"
       />
@@ -30,7 +32,7 @@ const { currentPage = 'Home' } = Astro.props;
       id="menu-toggle"
       type="button"
       class="flex size-11 flex-col items-center justify-center gap-1.5
-            rounded-md border border-border min-[1199px]:hidden"
+            rounded-md border border-border md:hidden"
       aria-label="Open navigation menu"
       aria-controls="site-navigation"
       aria-expanded="false"
