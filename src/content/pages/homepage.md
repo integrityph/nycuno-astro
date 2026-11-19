@@ -117,7 +117,7 @@ testimonials:
   heading: What Our Riders Say
   items:
     - quote: Way cheaper than my usual rides in Manhattan. Smooth app!
-      name: Jenna
+      name: Aaron
       location: NYC
       rating: 5
     - quote: Always on time and drivers are super friendly. My go-to app now.
