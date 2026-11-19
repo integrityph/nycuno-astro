@@ -1,0 +1,57 @@
+---
+interface Props {
+  promotionalBanners: {
+    items: {
+      heading: string;
+      button_text: string;
+      button_url: string;
+      theme: 'dark' | 'yellow';
+    }[];
+  };
+}
+
+const { promotionalBanners } = Astro.props;
+---
+
+<section class="bg-white px-4 py-[30px] sm:px-6">
+  <div class="mx-auto max-w-site rounded-lg bg-[#fafafb] px-4 py-16 sm:px-8 sm:py-20 lg:px-24 lg:py-28">
+    <div class="flex flex-col gap-8">
+      {promotionalBanners.items.map((promotion, index) => (
+        <div
+          class:list={[
+            'flex flex-col items-center justify-between gap-8 rounded-2xl px-6 py-8 text-center sm:flex-row sm:px-8 sm:text-left',
+            promotion.theme === 'dark'
+              ? 'bg-[#131313]'
+              : 'bg-[#ffd44a]',
+          ]}
+          data-reveal="up"
+        >
+          <h2
+            class:list={[
+              'font-sans text-2xl font-bold',
+              promotion.theme === 'dark' ? 'text-white' : 'text-black',
+            ]}
+            data-key-path={`promotional_banners.items.${index}.heading`}
+          >
+            {promotion.heading}
+          </h2>
+
+          <a
+            href={promotion.button_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              'inline-flex w-full items-center justify-center rounded-2xl px-5 py-2.5 font-semibold outline-offset-2 transition-colors duration-200 hover:outline hover:outline-2 hover:outline-[#646566] active:outline active:outline-2 active:outline-[#646566] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#646566] sm:w-[156px] sm:shrink-0',
+              promotion.theme === 'dark'
+                ? 'bg-[#ffd44a] text-black'
+                : 'bg-black text-white',
+            ]}
+            data-key-path={`promotional_banners.items.${index}.button_text`}
+          >
+            {promotion.button_text}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,77 @@
+---
+import { asset } from '@/utils/paths';
+
+interface Props {
+  registration: {
+    heading: string;
+    description: string;
+    items: {
+      title: string;
+      image: string;
+      image_alt: string;
+      url: string;
+    }[];
+  };
+}
+
+const { registration } = Astro.props;
+---
+
+<section class="bg-white px-4 py-12 sm:px-6 sm:py-16">
+  <div class="mx-auto my-4 max-w-site sm:my-8">
+    <!-- Section Heading -->
+    <div class="mb-8 text-center sm:mb-10">
+      <h2
+        class="font-heading text-3xl font-semibold sm:text-4xl"
+        data-key-path="easy_registration.heading"
+        data-reveal="up"
+      >
+        {registration.heading}
+      </h2>
+
+      <p
+        class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-text-muted sm:text-base"
+        data-key-path="easy_registration.description"
+        data-reveal="up"
+      >
+        {registration.description}
+      </p>
+    </div>
+
+    <!-- Registration Cards -->
+    <div class="mx-auto grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2">
+      {registration.items.map((item, index) => (
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative block min-h-full overflow-hidden rounded-[10px] bg-white shadow-[0_0_21px_rgba(0,0,0,0.21)]"
+          data-reveal="up"
+          data-key-path={`easy_registration.items.${index}.url`}
+        >
+          <img
+            src={asset(item.image)}
+            alt={item.image_alt}
+            data-key-path={`easy_registration.items.${index}.image`}
+            class="aspect-[100/108.9] w-full object-cover object-center sm:aspect-video max-[630px]:aspect-[100/66.25]"
+            loading="lazy"
+          />
+
+          <h3
+            class="relative z-10 mb-[22px] ml-[30px] mr-[35px] mt-[30px] text-[25px] font-bold leading-tight text-black transition-colors duration-200 group-hover:text-brand"
+            data-key-path={`easy_registration.items.${index}.title`}
+          >
+            {item.title}
+          </h3>
+
+          <span
+            aria-hidden="true"
+            class="absolute bottom-0 right-0 flex size-10 items-center justify-center rounded-tl-full bg-brand text-xl font-medium text-white transition-colors duration-200 sm:bg-transparent sm:group-hover:bg-brand"
+          >
+            &gt;
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

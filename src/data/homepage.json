@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "heading": "Your Ride, Your Way",
+    "description": "Discover convenient and reliable transportation with NYCUNO.",
+    "button_text": "Download the App",
+    "button_link": "/nycuno-astro/DownloadApps/",
+    "image": ""
+  }
+}

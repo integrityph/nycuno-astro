@@ -1,0 +1,217 @@
+backend:
+  name: github
+  repo: integrityph/nycuno-astro
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: pages
+    label: Website Pages
+    files:
+      - name: homepage
+        label: Homepage
+        file: src/content/pages/homepage.md
+        fields:
+          - label: Hero Section
+            name: hero
+            widget: object
+            fields:
+              - { label: Brand Text, name: brand_text, widget: string }
+              - { label: Brand Suffix, name: brand_suffix, widget: string }
+              - { label: Heading Prefix, name: heading_prefix, widget: string }
+              - { label: Heading Highlight, name: heading_highlight, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Background Image, name: background_image, widget: image }
+              - { label: Promotional Image, name: promotional_image, widget: image }
+              - { label: Promotional Image Alt, name: promotional_image_alt, widget: string }
+          - label: Why Choose NYC Uno
+            name: benefits
+            widget: object
+            fields:
+              - { label: Section Heading, name: heading, widget: string }
+              - label: Benefit Cards
+                name: items
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+                  - { label: Icon, name: icon, widget: image }
+                  - { label: Icon Alt Text, name: iconAlt, widget: string, required: false }
+          - label: How It Works
+            name: how_it_works
+            widget: object
+            fields:
+              - { label: Section Heading, name: heading, widget: string }
+              - { label: Background Image, name: background_image, widget: image }
+              - label: Steps
+                name: steps
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+                  - { label: Image, name: image, widget: image }
+                  - { label: Image Alt Text, name: image_alt, widget: string }
+          - label: Our Services Section
+            name: services
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - label: Service Items
+                name: items
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+                  - { label: Icon, name: icon, widget: image }
+          - label: Drive With Us Section
+            name: drive_with_us
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Button Text, name: button_text, widget: string }
+              - { label: Button URL, name: button_url, widget: string }
+              - label: Driver Benefits
+                name: benefits
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+                  - { label: Icon, name: icon, widget: image }
+          - label: Ride Options
+            name: ride_options
+            widget: object
+            fields:
+              - label: Section Heading
+                name: heading
+                widget: string
+
+              - label: Ride Options
+                name: items
+                widget: list
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+
+                  - label: Description
+                    name: description
+                    widget: text
+
+                  - label: Icon
+                    name: icon
+                    widget: image
+          - label: Promotional Banners
+            name: promotional_banners
+            widget: object
+            fields:
+              - label: Banners
+                name: items
+                widget: list
+                fields:
+                  - label: Heading
+                    name: heading
+                    widget: string
+
+                  - label: Button Text
+                    name: button_text
+                    widget: string
+
+                  - label: Button URL
+                    name: button_url
+                    widget: string
+
+                  - label: Theme
+                    name: theme
+                    widget: select
+                    options:
+                      - label: Dark
+                        value: dark
+                      - label: Yellow
+                        value: yellow
+          - label: Easy Registration
+            name: easy_registration
+            widget: object
+            fields:
+              - label: Section Heading
+                name: heading
+                widget: string
+
+              - label: Section Description
+                name: description
+                widget: text
+
+              - label: Registration Cards
+                name: items
+                widget: list
+                fields:
+                  - label: Card Title
+                    name: title
+                    widget: string
+
+                  - label: Image
+                    name: image
+                    widget: image
+
+                  - label: Image Alt Text
+                    name: image_alt
+                    widget: string
+
+                  - label: Destination URL
+                    name: url
+                    widget: string
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "object"
+            fields:
+              - label: "Section Heading"
+                name: "heading"
+                widget: "string"
+              - label: "Testimonials"
+                name: "items"
+                widget: "list"
+                fields:
+                  - label: "Quote"
+                    name: "quote"
+                    widget: "text"
+
+                  - label: "Name"
+                    name: "name"
+                    widget: "string"
+
+                  - label: "Location"
+                    name: "location"
+                    widget: "string"
+
+                  - label: "Rating"
+                    name: "rating"
+                    widget: "number"
+                    value_type: "int"
+                    min: 1
+                    max: 5
+          - label: "Safety & Support"
+            name: "safety_support"
+            widget: "object"
+            fields:
+              - label: "Section Heading"
+                name: "heading"
+                widget: "string"
+
+              - label: "Safety Features"
+                name: "items"
+                widget: "list"
+                fields:
+                  - label: "Title"
+                    name: "title"
+                    widget: "string"
+
+                  - label: "Description"
+                    name: "description"
+                    widget: "text"
+
+                  - label: "Icon"
+                    name: "icon"
+                    widget: "image"

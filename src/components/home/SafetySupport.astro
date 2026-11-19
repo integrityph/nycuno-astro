@@ -1,0 +1,40 @@
+---
+import SafetyFeatureCard from '@/components/SafetyFeatureCard.astro';
+
+interface Props {
+  safetySupport: {
+    heading: string;
+    items: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+}
+
+const { safetySupport } = Astro.props;
+---
+
+<section class="bg-white px-4 py-12 sm:px-6 sm:py-16">
+  <div class="mx-auto max-w-site">
+    <div class="mb-8 text-center sm:mb-12">
+      <h2
+        class="font-heading text-3xl font-semibold sm:text-4xl"
+        data-key-path="safety_support.heading"
+      >
+        {safetySupport.heading}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+      {safetySupport.items.map((feature, index) => (
+        <SafetyFeatureCard
+          title={feature.title}
+          description={feature.description}
+          icon={feature.icon}
+          previewPath={`safety_support.items.${index}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>

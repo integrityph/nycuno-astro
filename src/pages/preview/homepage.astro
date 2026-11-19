@@ -1,0 +1,68 @@
+---
+import '@/styles/global.css';
+import Hero from '@/components/home/Hero.astro';
+import Benefits from '@/components/home/Benefits.astro';
+import HowItWorks from '@/components/home/HowItWorks.astro';
+import Services from '@/components/home/Services.astro';
+import DriveWithUs from '@/components/home/DriveWithUs.astro';
+import RideOptions from '@/components/home/RideOptions.astro';
+import PromotionalBanners from '@/components/home/PromotionalBanners.astro';
+import EasyRegistration from '@/components/home/EasyRegistration.astro';
+import Testimonials from '@/components/home/Testimonials.astro';
+import SafetySupport from '@/components/home/SafetySupport.astro';
+import { getEntry } from 'astro:content';
+
+const homepage = await getEntry('pages', 'homepage');
+
+if (!homepage) {
+  throw new Error('Homepage content entry not found.');
+}
+
+const {
+  hero,
+  benefits,
+  how_it_works,
+  services,
+  drive_with_us,
+  ride_options,
+  promotional_banners,
+  easy_registration,
+  testimonials,
+  safety_support
+} = homepage.data;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NYCUNO — Hero Preview</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="m-0">
+    <main>
+      <Hero hero={hero} />
+      <Benefits benefits={benefits} />
+      <HowItWorks howItWorks={how_it_works} />
+      <Services services={services} />
+      <DriveWithUs driveWithUs={drive_with_us} />
+      <RideOptions rideOptions={ride_options} />
+      <PromotionalBanners promotionalBanners={promotional_banners} />
+      <EasyRegistration registration={easy_registration} />
+      <Testimonials testimonials={testimonials} />
+      <SafetySupport safetySupport={safety_support} />
+    </main>
+  </body>
+</html>

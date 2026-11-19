@@ -1,0 +1,40 @@
+---
+import ServiceCard from '@/components/ServiceCard.astro';
+
+interface Props {
+  services: {
+    heading: string;
+    items: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+}
+
+const { services } = Astro.props;
+---
+
+<section class="bg-white px-6 py-12 sm:py-16">
+  <div class="mx-auto max-w-site">
+    <div class="mb-12 text-center sm:mb-16" data-reveal="up">
+      <h2
+        data-key-path="services.heading"
+        class="font-heading text-3xl font-bold sm:text-4xl"
+      >
+        {services.heading}
+      </h2>
+    </div>
+
+    <div
+      class="mx-auto grid w-fit max-w-full grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {services.items.map((service, index) => (
+        <ServiceCard
+          {...service}
+          previewPath={`services.items.${index}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>

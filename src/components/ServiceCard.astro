@@ -1,23 +1,26 @@
 ---
+import { asset } from '@/utils/paths';
+
 interface Props {
   title: string;
   description: string;
   icon: string;
+  previewPath?: string;
 }
 
-const { title, description, icon } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const { title, description, icon, previewPath } = Astro.props;
 ---
 
 <article
-  class="flex h-full w-full max-w-[351px] flex-col items-center rounded-2xl bg-white p-6 text-center transition-shadow duration-300 hover:shadow-lg shadow-[0_0_4px_rgba(0,0,0,0.2)]"
+  class="flex h-full w-full max-w-[351px] flex-col items-center rounded-2xl bg-white p-6 text-center shadow-[0_0_4px_rgba(0,0,0,0.2)] transition-shadow duration-300 hover:shadow-lg"
   data-reveal="up"
 >
   <div
     class="mb-4 flex size-14 shrink-0 items-center justify-center rounded-full bg-[#ffd44a]"
   >
     <img
-      src={`${base}${icon}`}
+      data-key-path={previewPath ? `${previewPath}.icon` : undefined}
+      src={asset(icon)}
       alt=""
       aria-hidden="true"
       class="size-8 object-contain"
@@ -25,11 +28,17 @@ const base = import.meta.env.BASE_URL;
     />
   </div>
 
-  <h3 class="mb-4 text-xl font-semibold leading-snug text-black sm:text-2xl">
+  <h3
+    data-key-path={previewPath ? `${previewPath}.title` : undefined}
+    class="mb-4 text-xl font-semibold leading-snug text-black sm:text-2xl"
+  >
     {title}
   </h3>
 
-  <p class="text-base leading-[1.6] text-[#808080]">
+  <p
+    data-key-path={previewPath ? `${previewPath}.description` : undefined}
+    class="text-base leading-[1.6] text-[#808080]"
+  >
     {description}
   </p>
 </article>

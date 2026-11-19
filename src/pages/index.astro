@@ -1,134 +1,34 @@
 ---
+import { getEntry } from "astro:content";
+
 import MainLayout from '@/layouts/MainLayout.astro';
-import BenefitCard from '@/components/BenefitCard.astro';
-import ServiceCard from '@/components/ServiceCard.astro';
-import RideOptionCard from '@/components/RideOptionCard.astro';
-import TestimonialCard from '@/components/TestimonialCard.astro';
-import SafetyFeatureCard from '@/components/SafetyFeatureCard.astro';
+import Hero from '@/components/home/Hero.astro';
+import Benefits from '@/components/home/Benefits.astro';
+import HowItWorks from '@/components/home/HowItWorks.astro';
+import Services from '@/components/home/Services.astro';
+import DriveWithUs from '@/components/home/DriveWithUs.astro';
+import RideOptions from '@/components/home/RideOptions.astro';
+import PromotionalBanners from '@/components/home/PromotionalBanners.astro';
+import EasyRegistration from '@/components/home/EasyRegistration.astro';
+import Testimonials from '@/components/home/Testimonials.astro';
+import SafetySupport from '@/components/home/SafetySupport.astro';
 
-const base = import.meta.env.BASE_URL;
+const homepage = await getEntry("pages", "homepage");
 
-const benefits = [
-  {
-    title: 'Affordable Rides',
-    description:
-      "Get where you need to be without stretching your budget, while enjoying a service designed for convenience and value. Smart journeys don't have to cost more.",
-    icon: 'assets/img/icon/lucide-DollarSign-Outlined-Black.svg',
-  },
-  {
-    title: 'Complete Transparency',
-    description:
-      'No hidden peaks. No secret cuts. Every dollar is accounted for, visible to both rider and driver, ensuring fairness and trust in every trip.',
-    icon: 'assets/img/icon/search.svg',
-  },
-  {
-    title: 'Safe & Secure',
-    description:
-      'Trips where your peace of mind comes first. With verified drivers and support, you can travel knowing every journey is protected and help is always within reach.',
-    icon: 'assets/img/icon/guard-check.svg',
-  },
-  {
-    title: 'Eco-Friendly Options',
-    description:
-      "With available green rides in our fleet, you'll reduce your carbon footprint while still enjoying convenient rides. Travel smarter and greener with us.",
-    icon: 'assets/img/icon/leaf.svg',
-  },
-];
+if (!homepage) {
+  throw new Error("Homepage content entry not found. Check src/content/pages/homepage.md");
+}
 
-const services = [
-  {
-    title: 'Book a Ride',
-    description:
-      'Instantly find and book a ride to your destination with just a few taps. Fast, efficient, and always available.',
-    icon: 'assets/img/icon/car2ddd.svg',
-  },
-  {
-    title: 'Book for Someone Else',
-    description:
-      "Easily arrange transportation for friends, family, or clients from your account, even if they don't have the app.",
-    icon: 'assets/img/icon/lucide-Users-Outlined.svg',
-  },
-  {
-    title: 'Schedule a Ride',
-    description:
-      "Plan ahead and schedule your rides for a specific date and time, ensuring you're never late for an important event.",
-    icon: 'assets/img/icon/lucide-CalendarDays-Outlined.svg',
-  },
-];
-
-const rideOptions = [
-  {
-    title: 'Standard',
-    description: 'Your everyday affordable ride for getting around town.',
-    icon: 'assets/img/icon/taxi.svg',
-  },
-  {
-    title: 'XL',
-    description: 'Need more space? Perfect for groups or extra luggage.',
-    icon: 'assets/img/icon/car2ddd.svg',
-  },
-  {
-    title: 'Green',
-    description: 'Travel green with our selection of electric and hybrid vehicles.',
-    icon: 'assets/img/icon/leaf.svg',
-  },
-  {
-    title: 'Comfort',
-    description: 'Premium service for when you want to ride in style and comfort.',
-    icon: 'assets/img/icon/car.svg',
-  },
-  {
-    title: 'Executive',
-    description:
-      'Experience top-class comfort with high-end vehicles and professional drivers for the ultimate ride.',
-    icon: 'assets/img/icon/lucide-Gem-Outlined.svg',
-  },
-];
-
-const testimonials = [
-  {
-    quote: 'Way cheaper than my usual rides in Manhattan. Smooth app!',
-    name: 'Jenna',
-    location: 'NYC',
-  },
-  {
-    quote: 'Always on time and drivers are super friendly. My go-to app now.',
-    name: 'Mark',
-    location: 'Brooklyn',
-  },
-  {
-    quote: 'The Eco option is a game-changer! Great for conscious commuting.',
-    name: 'Sarah',
-    location: 'Queens',
-  },
-];
-
-const safetyFeatures = [
-  {
-    title: 'SOS Button',
-    description:
-      'Quick access to emergency services directly from the app.',
-    icon: 'assets/img/icon/phone.svg',
-  },
-  {
-    title: 'Driver Verification',
-    description:
-      'All drivers undergo thorough background checks for your peace of mind.',
-    icon: 'assets/img/icon/lucide-UserCheck-Outlined.svg',
-  },
-  {
-    title: 'Contact Sharing',
-    description:
-      'Share your trip details with trusted contacts in real-time.',
-    icon: 'assets/img/icon/lucide-Share2-Outlined.svg',
-  },
-  {
-    title: '24/7 In-App Chat & Hotline',
-    description:
-      'Assistance is always just a tap or call away, day or night.',
-    icon: 'assets/img/icon/lucide-MessageCircle-Outlined.svg',
-  },
-];
+const hero = homepage.data.hero;
+const benefits = homepage.data.benefits;
+const howItWorks = homepage.data.how_it_works;
+const services = homepage.data.services;
+const driveWithUs = homepage.data.drive_with_us;
+const rideOptions = homepage.data.ride_options;
+const promotionalBanners = homepage.data.promotional_banners;
+const easyRegistration = homepage.data.easy_registration;
+const testimonials = homepage.data.testimonials;
+const safetySupport = homepage.data.safety_support;
 ---
 
 <MainLayout
@@ -138,479 +38,33 @@ const safetyFeatures = [
 >
   <main>
     <!-- Hero -->
-    <section class="relative isolate overflow-hidden bg-white text-black lg:min-h-[700px] lg:bg-black lg:text-white">
-      <!-- Desktop background -->
-      <div class="absolute inset-0 -z-20 hidden lg:block">
-        <img
-          src={`${base}assets/img/home/nycuno-landing-img1.jpg`}
-          alt=""
-          aria-hidden="true"
-          fetchpriority="high"
-          class="h-full w-full object-cover object-bottom"
-        />
-      </div>
-
-      <!-- Desktop image overlay -->
-      <div
-        aria-hidden="true"
-        class="absolute inset-0 -z-10 hidden bg-linear-to-r from-black/75 via-black/50 to-black/15 lg:block"
-      ></div>
-
-      <!-- Mobile background image -->
-      <div class="relative h-[45vw] min-h-45 max-h-110 lg:hidden">
-        <img
-          src={`${base}assets/img/home/nycuno-landing-img1.jpg`}
-          alt=""
-          aria-hidden="true"
-          fetchpriority="high"
-          class="h-full w-full object-cover object-bottom"
-        />
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 bg-gradient-to-b from-black/10 to-black/25"
-        ></div>
-      </div>
-
-      <!-- Hero content -->
-      <div class="mx-auto flex max-w-site flex-col gap-8 px-5 py-8 sm:px-8 lg:min-h-[700px] lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:px-4 lg:py-12">
-        <!-- Hero copy -->
-        <div class="w-full lg:max-w-[616px] lg:shrink-0" data-reveal="up">
-          <h1 class="font-heading text-4xl font-bold italic leading-tight text-center lg:text-left sm:text-5xl lg:text-[51px] lg:text-white">
-            <span class="text-[#ffd95a]">NYC</span>Uno
-          </h1>
-
-          <h2 class="mt-3 font-heading text-5xl font-bold leading-[1.1] text-center lg:text-left sm:text-6xl lg:mt-5 lg:text-[72px] lg:leading-[1.25]">
-            Ride For <span class="text-[#ffd95a]">Less</span>
-          </h2>
-
-          <p class="mt-5 lg:max-w-xl text-base leading-7 text-text-muted text-center lg:text-left sm:text-lg lg:mt-7 lg:text-xl lg:leading-8 lg:text-white">
-            Fast, reliable, and affordable rides across New York City.
-          </p>
-        </div>
-
-        <!-- Promotional image -->
-        <div class="mx-auto w-full max-w-[440px] lg:mx-0 lg:max-w-[650px] lg:flex-1" data-reveal="up">
-          <img
-            src={`${base}assets/img/NYC_UNO-5_OFF_d1_v1.jpg`}
-            alt="NYC UNO promotional offer"
-            class="h-auto w-full object-contain"
-          />
-        </div>
-      </div>
-    </section>
+    <Hero hero={hero} />
 
     <!-- Why Choose NYCUNO -->
-    <section class="bg-white px-6 py-12 sm:py-16 lg:py-20">
-      <div class="mx-auto max-w-site">
-        <!-- Section heading -->
-        <div class="mb-10 text-center sm:mb-14" data-reveal="up">
-          <h2 class="font-heading text-3xl font-bold sm:text-4xl">
-            Why Choose NYC Uno?
-          </h2>
-        </div>
-
-        <!-- Benefit cards -->
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-          {benefits.map((benefit) => (
-            <BenefitCard {...benefit} />
-          ))}
-        </div>
-      </div>
-    </section>
+    <Benefits benefits={benefits} />
 
     <!-- How It Works -->
-    <section class="bg-white px-4 py-8 sm:px-6">
-      <div
-        class="mx-auto max-w-site rounded-lg bg-[#fafafb] px-4 py-12 sm:px-8 sm:py-16 lg:px-24"
-      >
-        <!-- Section Heading -->
-        <div class="mb-12 text-center sm:mb-16" data-reveal="up">
-          <h2 class="font-heading text-3xl font-bold sm:text-4xl">
-            How It Works
-          </h2>
-        </div>
-
-        <!-- Steps -->
-        <div
-          class="grid grid-cols-1 justify-items-center gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
-        >
-          <!-- Step 1: Download & Sign Up -->
-          <article class="flex w-full max-w-[363px] flex-col items-center text-center" data-reveal="up">
-            <div
-              style={`background-image: url("${base}assets/img/bg-yellow.jpg")`}
-              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
-            >
-              <img
-                src={`${base}assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro.png`}
-                alt="NYCUNO app displayed on a Google Pixel phone"
-                loading="lazy"
-                class="size-full object-contain"
-              />
-            </div>
-
-            <h3 class="mb-4 text-2xl font-semibold leading-snug">
-              1. Download &amp; Sign Up
-            </h3>
-
-            <p class="max-w-sm text-base leading-[1.6] text-[#808080]">
-              Get the NYC Uno app on your phone and create your account in
-              minutes.
-            </p>
-          </article>
-
-          <!-- Step 2: Book Your Ride -->
-          <article class="flex w-full max-w-[363px] flex-col items-center text-center" data-reveal="up">
-            <div
-              style={`background-image: url("${base}assets/img/bg-yellow.jpg")`}
-              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
-            >
-              <img
-                src={`${base}assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro%20front.png`}
-                alt="NYCUNO ride booking screen displayed on a phone"
-                loading="lazy"
-                class="size-full object-contain"
-              />
-            </div>
-
-            <h3 class="mb-4 text-2xl font-semibold leading-snug">
-              2. Book Your Ride
-            </h3>
-
-            <p class="max-w-sm text-base leading-[1.6] text-[#808080]">
-              Enter your destination, choose your ride option, and confirm
-              your pickup.
-            </p>
-          </article>
-
-          <!-- Step 3: Track & Arrive -->
-          <article
-            class="flex w-full max-w-[363px] flex-col items-center text-center sm:col-span-2 lg:col-span-1"
-            data-reveal="up"
-          >
-            <div
-            style={`background-image: url("${base}assets/img/bg-yellow.jpg")`}
-              class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
-            >
-              <img
-                src={`${base}assets/img/home/iMockup%20-%20Google%20Pixel%208%20Pro%20tilt.png`}
-                alt="NYCUNO app displayed on an angled phone mockup"
-                loading="lazy"
-                class="size-full object-contain"
-              />
-            </div>
-
-            <h3 class="mb-4 text-2xl font-semibold leading-snug">
-              3. Track &amp; Arrive
-            </h3>
-
-            <p class="max-w-sm text-base leading-[1.6] text-[#808080]">
-              Watch your driver approach on the map and enjoy a smooth
-              journey.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <HowItWorks howItWorks={howItWorks} />
 
     <!-- Our Services -->
-    <section class="bg-white px-6 py-12 sm:py-16">
-      <div class="mx-auto max-w-site">
-        <div class="mb-12 text-center sm:mb-16" data-reveal="up">
-          <h2 class="font-heading text-3xl font-bold sm:text-4xl">
-            Our Services
-          </h2>
-        </div>
-
-        <div
-          class="mx-auto grid w-fit max-w-full grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {
-            services.map((service) => (
-              <ServiceCard {...service} />
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <Services services={services} />
 
     <!-- Drive with Us -->
-    <section class="bg-white px-4 py-8 sm:px-6 sm:py-10">
-      <div class="mx-auto max-w-site rounded-lg bg-[#ffd95a] px-4 py-12 sm:px-8 sm:py-16 lg:px-8 xl:px-24 xl:py-28">
-        <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,0.63fr)_minmax(0,1fr)] lg:gap-4">
-          <!-- Introduction -->
-          <div class="flex flex-col items-center lg:items-start">
-            <h2 class="font-heading text-3xl font-bold leading-tight text-black sm:text-4xl" data-reveal="up">
-              Drive with Us. Earn More with NYC Uno.
-            </h2>
-
-            <p class="mt-5 max-w-xl text-base leading-7 text-[#19191f] lg:leading-8" data-reveal="up">
-              Join our growing network of drivers and take control of your earnings. Enjoy higher commissions and flexible hours with NYC Uno.
-            </p>
-
-            <a
-              href="https://play.google.com/store/apps/details?id=com.nycuno.driver"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-6 inline-flex w-full max-w-[188px] items-center justify-center rounded-2xl bg-[#070a12] px-5 py-3 text-center font-semibold text-white transition-colors duration-200 hover:bg-[#30333b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black sm:mt-8 lg:self-start"
-              data-reveal="up"
-            >
-              Apply to Drive
-            </a>
-          </div>
-
-          <!-- Driver Benefits -->
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <!-- Higher Commissions -->
-            <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
-              <img
-                src={`${base}assets/img/icon/lucide-Gauge-Outlined.svg`}
-                alt=""
-                aria-hidden="true"
-                class="mb-4 size-[30px]"
-                loading="lazy"
-              />
-              <h3 class="mb-2 text-lg font-semibold text-black">
-                Higher Commissions
-              </h3>
-              <p class="text-base leading-6 text-[#19191f]">
-                Keep more of what you earn with our driver-friendly commission structure.
-              </p>
-            </article>
-
-            <!-- Flexible Hours -->
-            <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
-              <img
-                src={`${base}assets/img/icon/lucide-Clock-Outlined.svg`}
-                alt=""
-                aria-hidden="true"
-                class="mb-4 size-[30px]"
-                loading="lazy"
-              />
-              <h3 class="mb-2 text-lg font-semibold text-black">
-                Flexible Hours
-              </h3>
-              <p class="text-base leading-6 text-[#19191f]">
-                Drive when you want, where you want. Fit driving into your schedule.
-              </p>
-            </article>
-
-            <!-- Earnings Transparency -->
-            <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
-              <img
-                src={`${base}assets/img/icon/lucide-DollarSign-Outlined.svg`}
-                alt=""
-                aria-hidden="true"
-                class="mb-4 size-[30px]"
-                loading="lazy"
-              />
-              <h3 class="mb-2 text-lg font-semibold text-black">
-                Earnings Transparency
-              </h3>
-              <p class="text-base leading-6 text-[#19191f]">
-                Track your trips and earnings in real time, right inside the app.
-              </p>
-            </article>
-
-            <!-- Dedicated Support -->
-            <article class="rounded-lg bg-[#fff9e6] p-6" data-reveal="up">
-              <img
-                src={`${base}assets/img/icon/lucide-ShieldCheck-Outlined.svg`}
-                alt=""
-                aria-hidden="true"
-                class="mb-4 size-[30px]"
-                loading="lazy"
-              />
-              <h3 class="mb-2 text-lg font-semibold text-black">
-                Dedicated Support
-              </h3>
-              <p class="text-base leading-6 text-[#19191f]">
-                Enjoy peace of mind with Dedicated Support, giving you 24/7 access to driver assistance whenever you need it.
-              </p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
+    <DriveWithUs driveWithUs={driveWithUs} />
 
     <!-- Ride Options -->
-    <section class="bg-surface px-6 py-16 sm:py-20 lg:py-24">
-      <div class="mx-auto max-w-site">
-        <div class="mb-10 text-center sm:mb-14" data-reveal="up">
-          <h2 class="font-heading text-3xl font-bold sm:text-4xl">
-            Ride Options
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {rideOptions.map((option) => (
-            <RideOptionCard {...option} />
-          ))}
-        </div>
-      </div>
-    </section>
+    <RideOptions rideOptions={rideOptions} />
 
     <!-- Promotional Banners -->
-    <section class="bg-white px-4 py-[30px] sm:px-6">
-      <div class="mx-auto max-w-site rounded-lg bg-[#fafafb] px-4 py-16 sm:px-8 sm:py-20 lg:px-24 lg:py-28">
-        <div class="flex flex-col gap-8">
-          <!-- Driver Promotion -->
-          <div 
-            class="flex flex-col items-center justify-between gap-8 rounded-2xl bg-[#131313] px-6 py-8 text-center sm:flex-row sm:px-8 sm:text-left"
-            data-reveal="up"
-          >
-            <h2 class="font-sans text-2xl font-bold text-white">
-              Drive &amp; Earn with NYC Uno
-            </h2>
-
-            <a
-              href="https://play.google.com/store/apps/details?id=com.nycuno.driver"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex w-full items-center justify-center rounded-2xl bg-[#ffd44a] px-5 py-2.5 font-semibold text-black outline-offset-2 transition-colors duration-200 hover:outline hover:outline-2 hover:outline-[#646566] active:outline active:outline-2 active:outline-[#646566] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#646566] sm:w-[156px] sm:shrink-0"
-            >
-              Apply to Drive
-            </a>
-          </div>
-
-          <!-- Rider Referral Promotion -->
-          <div 
-            class="flex flex-col items-center justify-between gap-8 rounded-2xl bg-[#ffd44a] px-6 py-8 text-center sm:flex-row sm:px-8 sm:text-left"
-            data-reveal="up"
-          >
-            <h2 class="font-sans text-2xl font-bold text-black">
-              Invite friends. Earn cash credits.
-            </h2>
-
-            <a
-              href="https://play.google.com/store/apps/details?id=com.nycuno.user"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex w-full items-center justify-center rounded-2xl bg-black px-5 py-2.5 font-semibold text-white outline-offset-2 transition-colors duration-200 hover:outline hover:outline-2 hover:outline-[#646566] active:outline active:outline-2 active:outline-[#646566] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#646566] sm:w-[156px] sm:shrink-0"
-            >
-              Refer Now
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <PromotionalBanners promotionalBanners={promotionalBanners} />
 
     <!-- Easy Registration -->
-    <section class="bg-white px-4 py-12 sm:px-6 sm:py-16">
-      <div class="mx-auto my-4 max-w-site sm:my-8">
-        <!-- Section Heading -->
-        <div class="mb-8 text-center sm:mb-10">
-          <h2 class="font-heading text-3xl font-semibold sm:text-4xl" data-reveal="up">
-            Easy Registration
-          </h2>
-          <p 
-            class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-text-muted sm:text-base"
-            data-reveal="up"
-          >
-            Register yourself and take amazing benefits from NYC Uno.
-            Drivers can register and earn for the Rides. Users can
-            register and book their Rides.
-          </p>
-        </div>
-
-        <!-- Registration Cards -->
-        <div class="mx-auto grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2">
-          <!-- Rider Registration -->
-          <a
-            href="https://play.google.com/store/apps/details?id=com.nycuno.user"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative block min-h-full overflow-hidden rounded-[10px] bg-white shadow-[0_0_21px_rgba(0,0,0,0.21)]"
-            data-reveal="up"
-          >
-            <img
-              src={`${base}nyc_img/pexels-cottonbro-4606338.jpg`}
-              alt="Rider registering for NYC Uno"
-              class="aspect-[100/108.9] w-full object-cover object-center sm:aspect-video max-[630px]:aspect-[100/66.25]"
-              loading="lazy"
-            />
-
-            <h3 class="relative z-10 mb-[22px] ml-[30px] mr-[35px] mt-[30px] text-[25px] font-bold leading-tight text-black transition-colors duration-200 group-hover:text-brand">
-              Register as a Rider
-            </h3>
-
-            <span
-              aria-hidden="true"
-              class="absolute bottom-0 right-0 flex size-10 items-center justify-center rounded-tl-full bg-brand text-xl font-medium text-white transition-colors duration-200 sm:bg-transparent sm:group-hover:bg-brand"
-            >
-              &gt;
-            </span>
-          </a>
-
-          <!-- Driver Registration -->
-          <a
-            href="https://play.google.com/store/apps/details?id=com.nycuno.driver"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative block min-h-full overflow-hidden rounded-[10px] bg-white shadow-[0_0_21px_rgba(0,0,0,0.21)]"
-            data-reveal="up"
-          >
-            <img
-              src={`${base}nyc_img/pexels-jeshoots-com-147458-13861.jpg`}
-              alt="Driver registering to drive with NYC Uno"
-              class="aspect-[100/108.9] w-full object-cover object-center sm:aspect-video max-[630px]:aspect-[100/66.25]"
-              loading="lazy"
-            />
-
-            <h3 class="relative z-10 mb-[22px] ml-[30px] mr-[35px] mt-[30px] text-[25px] font-bold leading-tight text-black transition-colors duration-200 group-hover:text-brand">
-              Register as a Driver
-            </h3>
-
-            <span
-              aria-hidden="true"
-              class="absolute bottom-0 right-0 flex size-10 items-center justify-center rounded-tl-full bg-brand text-xl font-medium text-white transition-colors duration-200 sm:bg-transparent sm:group-hover:bg-brand"
-            >
-              &gt;
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
+    <EasyRegistration registration={easyRegistration} />
 
     <!-- What Our Riders Say -->
-    <section class="bg-white px-4 py-12 sm:px-6 sm:py-16">
-      <div class="mx-auto max-w-site">
-        <!-- Section Heading -->
-        <div class="mb-8 text-center sm:mb-12" data-reveal="up">
-          <h2 class="font-heading text-3xl font-semibold sm:text-4xl">
-            What Our Riders Say
-          </h2>
-        </div>
-
-        <!-- Testimonials -->
-        <div class="grid grid-cols-1 items-stretch gap-5 sm:gap-6 md:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard {...testimonial}/>
-          ))}
-        </div>
-      </div>
-    </section>
+    <Testimonials testimonials={testimonials} />
 
     <!-- Safety & Support -->
-    <section class="bg-white px-4 py-12 sm:px-6 sm:py-16">
-      <div class="mx-auto max-w-site">
-        <!-- Section Heading -->
-        <div class="mb-8 text-center sm:mb-12" data-reveal="up">
-          <h2 class="font-heading text-3xl font-semibold sm:text-4xl">
-            Safety &amp; Support
-          </h2>
-        </div>
-
-        <!-- Safety Features -->
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
-          {safetyFeatures.map((feature) => (
-            <SafetyFeatureCard
-              title={feature.title}
-              description={feature.description}
-              icon={feature.icon}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    <SafetySupport safetySupport={safetySupport} />
   </main>
 </MainLayout>

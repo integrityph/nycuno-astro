@@ -1,0 +1,88 @@
+---
+import { asset } from '@/utils/paths';
+
+interface Props {
+  driveWithUs: {
+    heading: string;
+    description: string;
+    button_text: string;
+    button_url: string;
+    benefits: {
+      title: string;
+      description: string;
+      icon: string;
+    }[];
+  };
+}
+
+const { driveWithUs } = Astro.props;
+---
+
+<section class="bg-white px-4 py-8 sm:px-6 sm:py-10">
+  <div class="mx-auto max-w-site rounded-lg bg-[#ffd95a] px-4 py-12 sm:px-8 sm:py-16 lg:px-8 xl:px-24 xl:py-28">
+    <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,0.63fr)_minmax(0,1fr)] lg:gap-4">
+      <!-- Introduction -->
+      <div class="flex flex-col items-center lg:items-start">
+        <h2
+          data-key-path="drive_with_us.heading"
+          class="font-heading text-3xl font-bold leading-tight text-black sm:text-4xl"
+          data-reveal="up"
+        >
+          {driveWithUs.heading}
+        </h2>
+
+        <p
+          data-key-path="drive_with_us.description"
+          class="mt-5 max-w-xl text-base leading-7 text-[#19191f] lg:leading-8"
+          data-reveal="up"
+        >
+          {driveWithUs.description}
+        </p>
+
+        <a
+          data-key-path="drive_with_us.button_text"
+          href={driveWithUs.button_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex w-full max-w-[188px] items-center justify-center rounded-2xl bg-[#070a12] px-5 py-3 text-center font-semibold text-white transition-colors duration-200 hover:bg-[#30333b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black sm:mt-8 lg:self-start"
+          data-reveal="up"
+        >
+          {driveWithUs.button_text}
+        </a>
+      </div>
+
+      <!-- Driver Benefits -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {driveWithUs.benefits.map((benefit, index) => (
+          <article
+            class="rounded-lg bg-[#fff9e6] p-6"
+            data-reveal="up"
+          >
+            <img
+              data-key-path={`drive_with_us.benefits.${index}.icon`}
+              src={asset(benefit.icon)}
+              alt=""
+              aria-hidden="true"
+              class="mb-4 size-[30px]"
+              loading="lazy"
+            />
+
+            <h3
+              data-key-path={`drive_with_us.benefits.${index}.title`}
+              class="mb-2 text-lg font-semibold text-black"
+            >
+              {benefit.title}
+            </h3>
+
+            <p
+              data-key-path={`drive_with_us.benefits.${index}.description`}
+              class="text-base leading-6 text-[#19191f]"
+            >
+              {benefit.description}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

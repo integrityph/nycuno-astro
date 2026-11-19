@@ -1,0 +1,90 @@
+---
+import { asset } from '@/utils/paths';
+
+interface Props {
+  hero: {
+    brand_text: string;
+    brand_suffix: string;
+    heading_prefix: string;
+    heading_highlight: string;
+    description: string;
+    background_image: string;
+    promotional_image: string;
+    promotional_image_alt: string;
+  };
+}
+
+const { hero } = Astro.props;
+---
+
+<!-- Hero -->
+<section class="relative isolate overflow-hidden bg-white text-black lg:min-h-[700px] lg:bg-black lg:text-white">
+  <!-- Desktop background -->
+  <div class="absolute inset-0 -z-20 hidden lg:block">
+    <img
+      data-key-path="hero.background_image"
+      src={asset(hero.background_image)}
+      alt="NYC UNO background image"
+      aria-hidden="true"
+      fetchpriority="high"
+      class="h-full w-full object-cover object-bottom"
+    />
+  </div>
+
+  <!-- Desktop image overlay -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10 hidden bg-linear-to-r from-black/75 via-black/50 to-black/15 lg:block"
+  ></div>
+
+  <!-- Mobile background image -->
+  <div class="relative h-[45vw] min-h-45 max-h-110 lg:hidden">
+    <img
+      data-key-path="hero.background_image"
+      src={asset(hero.background_image)}
+      alt="NYC UNO background image"
+      aria-hidden="true"
+      fetchpriority="high"
+      class="h-full w-full object-cover object-bottom"
+    />
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-gradient-to-b from-black/10 to-black/25"
+    ></div>
+  </div>
+
+  <!-- Hero content -->
+  <div class="mx-auto flex max-w-site flex-col gap-8 px-5 py-8 sm:px-8 lg:min-h-[700px] lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:px-4 lg:py-12">
+    <!-- Hero copy -->
+    <div class="w-full lg:max-w-[616px] lg:shrink-0" data-reveal="up">
+      <h1 class="font-heading text-4xl font-bold italic leading-tight text-center lg:text-left sm:text-5xl lg:text-[51px] lg:text-white">
+        <span
+          data-key-path="hero.brand_text"
+          class="text-[#ffd95a]"
+        >{hero.brand_text}</span><span data-key-path="hero.brand_suffix">{hero.brand_suffix}</span>
+      </h1>
+
+      <h2 class="mt-3 font-heading text-5xl font-bold leading-[1.1] text-center lg:text-left sm:text-6xl lg:mt-5 lg:text-[72px] lg:leading-[1.25]">
+        <span data-key-path="hero.heading_prefix">{hero.heading_prefix}</span>
+        <span data-key-path="hero.heading_highlight" class="text-[#ffd95a] ml-3 lg:ml-4">{hero.heading_highlight}</span>
+      </h2>
+
+      <p
+        data-key-path="hero.description"
+        class="mt-5 lg:max-w-xl text-base leading-7 text-text-muted text-center lg:text-left sm:text-lg lg:mt-7 lg:text-xl lg:leading-8 lg:text-white"
+      >
+        {hero.description}
+      </p>
+    </div>
+
+    <!-- Promotional image -->
+    <div class="mx-auto w-full max-w-[440px] lg:mx-0 lg:max-w-[650px] lg:flex-1" data-reveal="up">
+      <img
+        data-key-path="hero.promotional_image"
+        src={asset(hero.promotional_image)}
+        alt={hero.promotional_image_alt}
+        class="h-auto w-full object-contain"
+      />
+    </div>
+  </div>
+</section>

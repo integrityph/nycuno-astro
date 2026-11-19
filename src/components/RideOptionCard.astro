@@ -1,20 +1,24 @@
 ---
+import { asset } from '@/utils/paths';
+
 interface Props {
   title: string;
   description: string;
   icon: string;
+  previewPath?: string;
 }
 
-const { title, description, icon } = Astro.props;
+const { title, description, icon, previewPath } = Astro.props;
 ---
 
-<article 
+<article
   class="flex h-full w-full flex-col items-center rounded-xl border border-border bg-white px-5 py-7 text-center transition-shadow duration-300 hover:shadow-lg"
   data-reveal="up"
 >
   <div class="mb-5 flex size-14 shrink-0 items-center justify-center rounded-full bg-[#ffd44a]">
     <img
-      src={icon}
+      data-key-path={previewPath ? `${previewPath}.icon` : undefined}
+      src={asset(icon)}
       alt=""
       aria-hidden="true"
       class="size-8 object-contain"
@@ -22,9 +26,17 @@ const { title, description, icon } = Astro.props;
     />
   </div>
 
-  <h3 class="mb-3 text-lg font-semibold">{title}</h3>
+  <h3
+    data-key-path={previewPath ? `${previewPath}.title` : undefined}
+    class="mb-3 text-lg font-semibold"
+  >
+    {title}
+  </h3>
 
-  <p class="text-sm leading-7 text-text-muted">
+  <p
+    data-key-path={previewPath ? `${previewPath}.description` : undefined}
+    class="text-sm leading-7 text-text-muted"
+  >
     {description}
   </p>
 </article>

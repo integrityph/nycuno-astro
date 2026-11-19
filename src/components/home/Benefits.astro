@@ -1,0 +1,39 @@
+---
+import BenefitCard from '@/components/BenefitCard.astro';
+
+interface Props {
+  benefits: {
+    heading: string;
+    items: {
+      title: string;
+      description: string;
+      icon: string;
+      iconAlt?: string;
+    }[];
+  };
+}
+
+const { benefits } = Astro.props;
+---
+
+<section class="bg-white px-6 py-12 sm:py-16 lg:py-20">
+  <div class="mx-auto max-w-site">
+    <div class="mb-10 text-center sm:mb-14" data-reveal="up">
+      <h2
+        data-key-path="benefits.heading"
+        class="font-heading text-3xl font-bold sm:text-4xl"
+      >
+        {benefits.heading}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+      {benefits.items.map((benefit, index) => (
+        <BenefitCard
+          {...benefit}
+          previewPath={`benefits.items.${index}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>

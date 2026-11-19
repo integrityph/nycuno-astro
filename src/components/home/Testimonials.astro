@@ -1,0 +1,44 @@
+---
+import TestimonialCard from '@/components/TestimonialCard.astro';
+
+interface Props {
+  testimonials: {
+    heading: string;
+    items: {
+      quote: string;
+      name: string;
+      location: string;
+      rating: number;
+    }[];
+  };
+}
+
+const { testimonials } = Astro.props;
+---
+
+<section class="bg-white px-4 py-12 sm:px-6 sm:py-16">
+  <div class="mx-auto max-w-site">
+    <!-- Section Heading -->
+    <div class="mb-8 text-center sm:mb-12" data-reveal="up">
+      <h2
+        class="font-heading text-3xl font-semibold sm:text-4xl"
+        data-key-path="testimonials.heading"
+      >
+        {testimonials.heading}
+      </h2>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="grid grid-cols-1 items-stretch gap-5 sm:gap-6 md:grid-cols-3">
+      {testimonials.items.map((testimonial, index) => (
+        <TestimonialCard
+          quote={testimonial.quote}
+          name={testimonial.name}
+          location={testimonial.location}
+          rating={testimonial.rating}
+          previewPath={`testimonials.items.${index}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>

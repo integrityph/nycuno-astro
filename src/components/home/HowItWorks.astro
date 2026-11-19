@@ -1,0 +1,73 @@
+---
+import { asset } from '@/utils/paths';
+
+interface Props {
+  howItWorks: {
+    heading: string;
+    background_image: string;
+    steps: {
+      title: string;
+      description: string;
+      image: string;
+      image_alt: string;
+    }[];
+  };
+}
+
+const { howItWorks } = Astro.props;
+---
+
+<section class="bg-white px-4 py-8 sm:px-6">
+  <div class="mx-auto max-w-site rounded-lg bg-[#fafafb] px-4 py-12 sm:px-8 sm:py-16 lg:px-24">
+    <!-- Section Heading -->
+    <div class="mb-12 text-center sm:mb-16" data-reveal="up">
+      <h2
+        data-key-path="how_it_works.heading"
+        class="font-heading text-3xl font-bold sm:text-4xl"
+      >
+        {howItWorks.heading}
+      </h2>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 justify-items-center gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {howItWorks.steps.map((step, index) => (
+        <article
+          class:list={[
+            'flex w-full max-w-[363px] flex-col items-center text-center',
+            index === 2 && 'sm:col-span-2 lg:col-span-1',
+          ]}
+          data-reveal="up"
+        >
+          <div
+            data-key-path="how_it_works.background_image"
+            class="mb-6 flex size-64 items-center justify-center rounded-2xl bg-cover bg-center p-4"
+            style={`background-image: url("${asset(howItWorks.background_image)}")`}
+          >
+            <img
+              data-key-path={`how_it_works.steps.${index}.image`}
+              src={asset(step.image)}
+              alt={step.image_alt}
+              loading="lazy"
+              class="size-full object-contain"
+            />
+          </div>
+
+          <h3
+            data-key-path={`how_it_works.steps.${index}.title`}
+            class="mb-4 text-2xl font-semibold leading-snug"
+          >
+            {index + 1}. {step.title}
+          </h3>
+
+          <p
+            data-key-path={`how_it_works.steps.${index}.description`}
+            class="max-w-sm text-base leading-[1.6] text-[#808080]"
+          >
+            {step.description}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
