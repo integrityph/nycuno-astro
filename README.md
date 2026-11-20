@@ -5,9 +5,9 @@ A modernization of the NYCUNO website using **Astro** and **Tailwind CSS**. The 
 ## Project Status
 
 - [x] Architecture agreed: Astro + Tailwind CSS
-- [ ] Initialize Astro project and local development setup
-- [ ] Migrate existing website pages
-- [ ] Validate visual consistency, responsiveness, and integrations
+- [x] Initialize Astro project and local development setup
+- [x] Migrate existing website pages
+- [x] Validate visual consistency, responsiveness, and integrations
 - [ ] Integrate Decap CMS for content management
 - [ ] Configure and validate production deployment
 
