@@ -1,0 +1,45 @@
+---
+import '@/styles/global.css';
+import ContactInfo from '@/components/contact/ContactInfo.astro';
+import { getEntry } from 'astro:content';
+
+const contactPage = await getEntry('contactPages', 'contact');
+
+if (!contactPage) {
+  throw new Error('Contact Us content not found.');
+}
+
+const {
+  heading,
+  address_heading,
+  address,
+  address_url,
+  phone_heading,
+  phone,
+  email,
+} = contactPage.data.contact;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="m-0">
+    <ContactInfo
+      heading={heading}
+      addressHeading={address_heading}
+      address={address}
+      addressUrl={address_url}
+      phoneHeading={phone_heading}
+      phone={phone}
+      email={email}
+    />
+  </body>
+</html>

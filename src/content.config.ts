@@ -133,7 +133,26 @@ const aboutPages = defineCollection({
   }),
 });
 
+const contactPages = defineCollection({
+  loader: glob({
+    pattern: 'contact.md',
+    base: './src/content/pages',
+  }),
+  schema: z.object({
+    contact: z.object({
+      heading: z.string(),
+      address_heading: z.string(),
+      address: z.string(),
+      address_url: z.string(),
+      phone_heading: z.string(),
+      phone: z.string(),
+      email: z.string().optional(),
+    }),
+  }),
+});
+
 export const collections = {
   pages,
   aboutPages,
+  contactPages,
 };

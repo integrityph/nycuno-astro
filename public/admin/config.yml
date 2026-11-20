@@ -234,3 +234,34 @@ collections:
                   label: Paragraph
                   name: paragraph
                   widget: markdown
+      - name: contact
+        label: Contact Us
+        file: src/content/pages/contact.md
+        fields:
+          - label: Contact Information
+            name: contact
+            widget: object
+            fields:
+              - label: Page Heading
+                name: heading
+                widget: string
+              - label: Address Heading
+                name: address_heading
+                widget: string
+              - label: Address
+                name: address
+                widget: string
+              - label: Google Maps URL
+                name: address_url
+                widget: string
+              - label: Phone Section Heading
+                name: phone_heading
+                widget: string
+              - label: Phone Number
+                name: phone
+                widget: string
+              - label: Email Address
+                name: email
+                widget: string
+                required: false
+

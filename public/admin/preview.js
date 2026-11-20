@@ -555,5 +555,196 @@ const AboutPreview = ({ entry, document: previewDocument }) => {
   `;
 };
 
+const ContactPreview = ({ entry, document: previewDocument }) => {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const favicon = previewDocument.createElement('link');
+    favicon.rel = 'icon';
+    favicon.href = 'data:,';
+    previewDocument.head.appendChild(favicon);
+
+    const previewUrl = new URL(
+      '../preview/contact/',
+      window.location.href,
+    );
+
+    async function loadPreview() {
+      try {
+        const response = await fetch(previewUrl);
+
+        if (!response.ok) {
+          throw new Error(`Preview request failed: ${response.status}`);
+        }
+
+        const htmlText = await response.text();
+        const parsedDocument = new DOMParser().parseFromString(
+          htmlText,
+          'text/html',
+        );
+
+        if (cancelled) return;
+
+        const root = previewDocument.getElementById(
+          'nycuno-contact-preview-root',
+        );
+
+        if (!root) {
+          throw new Error('Contact preview container was not found.');
+        }
+
+        previewDocument.body.className = parsedDocument.body.className;
+
+        parsedDocument.head
+          .querySelectorAll(
+            'link[rel="stylesheet"], link[rel="preconnect"], style',
+          )
+          .forEach((node) => {
+            const clone = previewDocument.importNode(node, true);
+
+            if (clone.tagName === 'LINK') {
+              const href = clone.getAttribute('href');
+
+              if (href) {
+                clone.href = new URL(href, previewUrl).href;
+              }
+            }
+
+            previewDocument.head.appendChild(clone);
+          });
+
+        root.innerHTML = parsedDocument.body.innerHTML;
+
+        setIsReady(true);
+      } catch (error) {
+        console.error('NYCUNO Contact preview error:', error);
+
+        const root = previewDocument.getElementById(
+          'nycuno-contact-preview-root',
+        );
+
+        if (root) {
+          root.textContent = 'Unable to load the Contact Us preview.';
+        }
+      }
+    }
+
+    loadPreview();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [previewDocument]);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const contact = entry.getIn(['data', 'contact'])?.toJS();
+
+    if (!contact) return;
+
+    // Update page heading.
+    previewDocument
+      .querySelectorAll('[data-key-path="contact.heading"]')
+      .forEach((element) => {
+        element.textContent = contact.heading ?? '';
+      });
+
+    // Update address section heading.
+    previewDocument
+      .querySelectorAll('[data-key-path="contact.address_heading"]')
+      .forEach((element) => {
+        element.textContent = contact.address_heading ?? '';
+      });
+
+    // Update address and Google Maps URL.
+    previewDocument
+      .querySelectorAll('[data-key-path="contact.address"]')
+      .forEach((element) => {
+        element.href = contact.address_url ?? '';
+        const text = element.querySelector('span');
+
+        if (text) {
+          text.textContent = contact.address ?? '';
+        }
+      });
+
+    // Update phone section heading.
+    previewDocument
+      .querySelectorAll('[data-key-path="contact.phone_heading"]')
+      .forEach((element) => {
+        element.textContent = contact.phone_heading ?? '';
+      });
+
+    // Update phone number and telephone link.
+    previewDocument
+      .querySelectorAll('[data-key-path="contact.phone"]')
+      .forEach((element) => {
+        const phone = contact.phone ?? '';
+        element.href = `tel:${phone.replace(/[\s()-]/g, '')}`;
+
+        const text = element.querySelector('span');
+
+        if (text) {
+          text.textContent = phone;
+        }
+      });
+
+    // Update email address and mailto link.
+    const email = contact.email ?? '';
+    const emailContainer = previewDocument.querySelector(
+      '[data-key-path="contact.phone_heading"]',
+    )?.parentElement;
+
+    if (emailContainer) {
+      let emailElement = previewDocument.querySelector(
+        '[data-key-path="contact.email"]',
+      );
+
+      if (email) {
+        if (!emailElement) {
+          emailElement = previewDocument.createElement('a');
+          emailElement.className =
+            'flex items-start gap-2 text-base leading-[26px] text-[#404040] transition-colors hover:text-brand';
+          emailElement.setAttribute('data-reveal', 'up');
+          emailElement.setAttribute('data-key-path', 'contact.email');
+
+          emailElement.innerHTML = `
+            <svg
+              class="mt-1 size-4 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="m3 7 9 6 9-6"></path>
+            </svg>
+            <span></span>
+          `;
+
+          emailContainer.appendChild(emailElement);
+        }
+
+        emailElement.href = `mailto:${email}`;
+        emailElement.querySelector('span').textContent = email;
+      } else {
+        emailElement?.remove();
+      }
+    }
+  }, [entry, isReady, previewDocument]);
+
+  return html`
+    <div id="nycuno-contact-preview-root">
+      Loading NYCUNO Contact Us preview...
+    </div>
+  `;
+};
+
 CMS.registerPreviewTemplate('homepage', HomepagePreview);
 CMS.registerPreviewTemplate('about', AboutPreview);
+CMS.registerPreviewTemplate('contact', ContactPreview);
