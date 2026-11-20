@@ -1,0 +1,36 @@
+---
+interface Props {
+  heading: string;
+  paragraphs: string[];
+}
+
+const { heading, paragraphs } = Astro.props;
+---
+
+<section class="bg-white px-0 py-[50px]">
+  <div class="mx-auto max-w-[1280px] px-[15px]">
+    <h1
+      class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-none text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
+      data-reveal="up"
+      data-key-path="about_intro.heading"
+    >
+      {heading}
+    </h1>
+
+    <div 
+      class="text-base font-normal leading-[26px] text-[#404040]" 
+      data-key-path="about_intro.paragraphs"
+    >
+      {paragraphs.map((paragraph, index) => (
+        <div
+          class:list={[
+            index === paragraphs.length - 1 ? 'mb-0' : 'mb-7',
+          ]}
+          data-reveal="up"
+          data-key-path={`about_intro.paragraphs.${index}`}
+          set:html={paragraph}
+        />
+      ))}
+    </div>
+  </div>
+</section>

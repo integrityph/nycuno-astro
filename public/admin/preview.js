@@ -1,4 +1,3 @@
-
 const { useEffect, useState } = CMS.React;
 
 const HomepagePreview = ({ entry, getAsset, document: previewDocument }) => {
@@ -423,4 +422,138 @@ const HomepagePreview = ({ entry, getAsset, document: previewDocument }) => {
   `;
 };
 
+const AboutPreview = ({ entry, document: previewDocument }) => {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const favicon = previewDocument.createElement('link');
+    favicon.rel = 'icon';
+    favicon.href = 'data:,';
+    previewDocument.head.appendChild(favicon);
+
+    const previewUrl = new URL(
+      '../preview/about/',
+      window.location.href,
+    );
+
+    async function loadPreview() {
+      try {
+        const response = await fetch(previewUrl);
+
+        if (!response.ok) {
+          throw new Error(`Preview request failed: ${response.status}`);
+        }
+
+        const htmlText = await response.text();
+        const parsedDocument = new DOMParser().parseFromString(
+          htmlText,
+          'text/html',
+        );
+
+        if (cancelled) return;
+
+        const root = previewDocument.getElementById(
+          'nycuno-about-preview-root',
+        );
+
+        if (!root) {
+          throw new Error('About preview container was not found.');
+        }
+
+        previewDocument.body.className = parsedDocument.body.className;
+
+        parsedDocument.head
+          .querySelectorAll(
+            'link[rel="stylesheet"], link[rel="preconnect"], style',
+          )
+          .forEach((node) => {
+            const clone = previewDocument.importNode(node, true);
+
+            if (clone.tagName === 'LINK') {
+              const href = clone.getAttribute('href');
+
+              if (href) {
+                clone.href = new URL(href, previewUrl).href;
+              }
+            }
+
+            previewDocument.head.appendChild(clone);
+          });
+
+        root.innerHTML = parsedDocument.body.innerHTML;
+
+        setIsReady(true);
+      } catch (error) {
+        console.error('NYCUNO About preview error:', error);
+
+        const root = previewDocument.getElementById(
+          'nycuno-about-preview-root',
+        );
+
+        if (root) {
+          root.textContent = 'Unable to load the About Us preview.';
+        }
+      }
+    }
+
+    loadPreview();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [previewDocument]);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const aboutIntro = entry.getIn(['data', 'about_intro'])?.toJS();
+
+    if (!aboutIntro) return;
+
+    // Update the heading.
+    previewDocument
+      .querySelectorAll('[data-key-path="about_intro.heading"]')
+      .forEach((element) => {
+        element.textContent = aboutIntro.heading ?? '';
+      });
+
+    // Rebuild the paragraphs so adding and removing items works.
+    const paragraphsContainer = previewDocument.querySelector(
+      '[data-key-path="about_intro.paragraphs"]',
+    );
+
+    if (paragraphsContainer) {
+      paragraphsContainer.innerHTML = '';
+
+      (aboutIntro.paragraphs ?? []).forEach((paragraph, index) => {
+        const wrapper = previewDocument.createElement('div');
+
+        wrapper.className =
+          index === aboutIntro.paragraphs.length - 1
+            ? 'mb-0'
+            : 'mb-7';
+
+        wrapper.setAttribute('data-reveal', 'up');
+        wrapper.setAttribute(
+          'data-key-path',
+          `about_intro.paragraphs.${index}`,
+        );
+
+        wrapper.innerHTML = marked.parse(paragraph ?? '');
+
+        paragraphsContainer.appendChild(wrapper);
+      });
+    }
+  }, [entry, isReady, previewDocument]);
+
+  return html`
+    <div id="nycuno-about-preview-root">
+      Loading NYCUNO About Us preview...
+    </div>
+  `;
+};
+
 CMS.registerPreviewTemplate('homepage', HomepagePreview);
+CMS.registerPreviewTemplate('about', AboutPreview);

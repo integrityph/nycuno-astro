@@ -1,0 +1,47 @@
+---
+import '@/styles/global.css';
+import AboutIntro from '@/components/about/AboutIntro.astro';
+import { getEntry } from 'astro:content';
+import { marked } from 'marked';
+
+const aboutPage = await getEntry('aboutPages', 'about');
+
+if (!aboutPage) {
+  throw new Error('About Us content entry not found.');
+}
+
+const { heading, paragraphs } = aboutPage.data.about_intro;
+
+const renderedParagraphs = await Promise.all(
+  paragraphs.map((paragraph) => marked.parse(paragraph))
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NYCUNO — About Us Preview</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="m-0">
+    <main>
+      <AboutIntro
+        heading={heading}
+        paragraphs={renderedParagraphs}
+      />
+    </main>
+  </body>
+</html>

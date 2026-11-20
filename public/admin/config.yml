@@ -215,3 +215,22 @@ collections:
                   - label: "Icon"
                     name: "icon"
                     widget: "image"
+      - name: about
+        label: About Us
+        file: src/content/pages/about.md
+        fields:
+          - label: About Us Content
+            name: about_intro
+            widget: object
+            fields:
+              - label: Page Heading
+                name: heading
+                widget: string
+
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field:
+                  label: Paragraph
+                  name: paragraph
+                  widget: markdown
