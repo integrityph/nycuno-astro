@@ -1,0 +1,49 @@
+---
+import '@/styles/global.css';
+import DownloadApps from '@/components/downloads/DownloadApps.astro';
+import { getEntry } from 'astro:content';
+
+const downloadPage = await getEntry('downloadPages', 'downloads');
+
+if (!downloadPage) {
+  throw new Error('Download Apps content not found.');
+}
+
+const {
+  heading,
+  description,
+  app_store_url,
+  google_play_url,
+  app_store_image,
+  google_play_image,
+  background_image,
+  phone_image,
+  phone_image_alt,
+} = downloadPage.data.download;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="m-0">
+    <DownloadApps
+      heading={heading}
+      description={description}
+      appStoreUrl={app_store_url}
+      googlePlayUrl={google_play_url}
+      appStoreImage={app_store_image}
+      googlePlayImage={google_play_image}
+      backgroundImage={background_image}
+      phoneImage={phone_image}
+      phoneImageAlt={phone_image_alt}
+    />
+  </body>
+</html>

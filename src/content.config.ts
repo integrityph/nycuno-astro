@@ -151,8 +151,29 @@ const contactPages = defineCollection({
   }),
 });
 
+const downloadPages = defineCollection({
+  loader: glob({
+    pattern: 'downloads.md',
+    base: './src/content/pages',
+  }),
+  schema: z.object({
+    download: z.object({
+      heading: z.string(),
+      description: z.string(),
+      app_store_url: z.string(),
+      google_play_url: z.string(),
+      app_store_image: z.string(),
+      google_play_image: z.string(),
+      background_image: z.string(),
+      phone_image: z.string(),
+      phone_image_alt: z.string(),
+    }),
+  }),
+});
+
 export const collections = {
   pages,
   aboutPages,
   contactPages,
+  downloadPages
 };

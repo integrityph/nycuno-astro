@@ -745,6 +745,194 @@ const ContactPreview = ({ entry, document: previewDocument }) => {
   `;
 };
 
+const DownloadAppsPreview = ({
+  entry,
+  getAsset,
+  document: previewDocument,
+}) => {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const favicon = previewDocument.createElement('link');
+    favicon.rel = 'icon';
+    favicon.href = 'data:,';
+    previewDocument.head.appendChild(favicon);
+
+    const previewUrl = new URL(
+      '../preview/downloads/',
+      window.location.href,
+    );
+
+    async function loadPreview() {
+      try {
+        const response = await fetch(previewUrl);
+
+        if (!response.ok) {
+          throw new Error(`Preview request failed: ${response.status}`);
+        }
+
+        const htmlText = await response.text();
+        const parsedDocument = new DOMParser().parseFromString(
+          htmlText,
+          'text/html',
+        );
+
+        if (cancelled) return;
+
+        const root = previewDocument.getElementById(
+          'nycuno-downloads-preview-root',
+        );
+
+        if (!root) {
+          throw new Error('Download Apps preview container was not found.');
+        }
+
+        previewDocument.body.className = parsedDocument.body.className;
+
+        parsedDocument.head
+          .querySelectorAll(
+            'link[rel="stylesheet"], link[rel="preconnect"], style',
+          )
+          .forEach((node) => {
+            const clone = previewDocument.importNode(node, true);
+
+            if (clone.tagName === 'LINK') {
+              const href = clone.getAttribute('href');
+
+              if (href) {
+                clone.href = new URL(href, previewUrl).href;
+              }
+            }
+
+            previewDocument.head.appendChild(clone);
+          });
+
+        root.innerHTML = parsedDocument.body.innerHTML;
+
+        setIsReady(true);
+      } catch (error) {
+        console.error('NYCUNO Download Apps preview error:', error);
+
+        const root = previewDocument.getElementById(
+          'nycuno-downloads-preview-root',
+        );
+
+        if (root) {
+          root.textContent = 'Unable to load the Download Apps preview.';
+        }
+      }
+    }
+
+    loadPreview();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [previewDocument]);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const download = entry.getIn(['data', 'download'])?.toJS();
+
+    if (!download) return;
+
+    const previewUrl = new URL(
+      '../preview/downloads/',
+      window.location.href,
+    );
+
+    const siteBase = new URL('../../', previewUrl);
+
+    // Resolve CMS image paths and preserve the site's base URL.
+    const resolveImage = (path) => {
+      if (!path) return '';
+
+      const cmsAsset = getAsset(path);
+      const imagePath = cmsAsset?.url || path;
+
+      if (/^(https?:|blob:|data:)/i.test(imagePath)) {
+        return imagePath;
+      }
+
+      return new URL(
+        imagePath.replace(/^\/+/, ''),
+        siteBase,
+      ).href;
+    };
+
+    // Update page heading.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.heading"]')
+      .forEach((element) => {
+        element.textContent = download.heading ?? '';
+      });
+
+    // Update description.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.description"]')
+      .forEach((element) => {
+        element.textContent = download.description ?? '';
+      });
+
+    // Update App Store URL.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.app_store_url"]')
+      .forEach((element) => {
+        element.href = download.app_store_url ?? '';
+      });
+
+    // Update Google Play URL.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.google_play_url"]')
+      .forEach((element) => {
+        element.href = download.google_play_url ?? '';
+      });
+
+    // Update App Store badge.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.app_store_image"]')
+      .forEach((element) => {
+        element.src = resolveImage(download.app_store_image);
+      });
+
+    // Update Google Play badge.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.google_play_image"]')
+      .forEach((element) => {
+        element.src = resolveImage(download.google_play_image);
+      });
+
+    // Update background image.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.background_image"]')
+      .forEach((element) => {
+        const imageUrl = resolveImage(download.background_image);
+
+        element.style.backgroundImage = imageUrl
+          ? `url("${imageUrl}")`
+          : '';
+      });
+
+    // Update phone mockup image and alt text.
+    previewDocument
+      .querySelectorAll('[data-key-path="download.phone_image"]')
+      .forEach((element) => {
+        element.src = resolveImage(download.phone_image);
+        element.alt = download.phone_image_alt ?? '';
+      });
+  }, [entry, getAsset, isReady, previewDocument]);
+
+  return html`
+    <div id="nycuno-downloads-preview-root">
+      Loading NYCUNO Download Apps preview...
+    </div>
+  `;
+};
+
 CMS.registerPreviewTemplate('homepage', HomepagePreview);
 CMS.registerPreviewTemplate('about', AboutPreview);
 CMS.registerPreviewTemplate('contact', ContactPreview);
+CMS.registerPreviewTemplate('downloads', DownloadAppsPreview);

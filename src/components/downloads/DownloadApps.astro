@@ -1,0 +1,103 @@
+---
+import { asset } from '@/utils/paths';
+
+interface Props {
+  heading: string;
+  description: string;
+  appStoreUrl: string;
+  googlePlayUrl: string;
+  appStoreImage: string;
+  googlePlayImage: string;
+  backgroundImage: string;
+  phoneImage: string;
+  phoneImageAlt: string;
+}
+
+const {
+  heading,
+  description,
+  appStoreUrl,
+  googlePlayUrl,
+  appStoreImage,
+  googlePlayImage,
+  backgroundImage,
+  phoneImage,
+  phoneImageAlt,
+} = Astro.props;
+---
+
+<main class="mx-auto w-full max-w-site flex-1 px-4 py-12.5 sm:px-6">
+  <section class="grid items-start gap-10 md:grid-cols-2 md:gap-12">
+    <div>
+      <h1
+        class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-tight text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
+        data-reveal="up"
+        data-key-path="download.heading"
+      >
+        {heading}
+      </h1>
+
+      <p
+        class="text-base font-normal leading-[26px] text-[#404040]"
+        data-reveal="up"
+        data-key-path="download.description"
+      >
+        {description}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href={appStoreUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download NYCUNO on the App Store"
+          data-reveal="up"
+          data-key-path="download.app_store_url"
+        >
+          <img
+            src={asset(appStoreImage)}
+            alt="Download on the App Store"
+            class="h-12 w-auto"
+            data-key-path="download.app_store_image"
+          />
+        </a>
+
+        <a
+          href={googlePlayUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Get NYCUNO on Google Play"
+          data-reveal="up"
+          data-key-path="download.google_play_url"
+        >
+          <img
+            src={asset(googlePlayImage)}
+            alt="Get it on Google Play"
+            class="h-12 w-auto"
+            data-key-path="download.google_play_image"
+          />
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="relative flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat px-4 py-8 sm:min-h-[420px]"
+      style={`background-image: url("${asset(backgroundImage)}")`}
+      data-reveal="up"
+      data-key-path="download.background_image"
+    >
+      <div
+        class="absolute inset-0 z-10 rounded-xl bg-[#e7ca17]/50"
+        aria-hidden="true"
+      ></div>
+
+      <img
+        src={asset(phoneImage)}
+        alt={phoneImageAlt}
+        class="relative z-20 h-auto w-[148px] rounded-2xl shadow-[7px_7px_12px_3px_rgba(0,0,0,0.41)]"
+        loading="lazy"
+        data-key-path="download.phone_image"
+      />
+    </div>
+  </section>
+</main>

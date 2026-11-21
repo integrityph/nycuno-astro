@@ -264,4 +264,47 @@ collections:
                 name: email
                 widget: string
                 required: false
+      - name: downloads
+        label: Download Apps
+        file: src/content/pages/downloads.md
+        fields:
+          - label: Download App Content
+            name: download
+            widget: object
+            fields:
+              - label: Page Heading
+                name: heading
+                widget: string
+
+              - label: Description
+                name: description
+                widget: text
+
+              - label: App Store URL
+                name: app_store_url
+                widget: string
+
+              - label: Google Play URL
+                name: google_play_url
+                widget: string
+
+              - label: App Store Badge
+                name: app_store_image
+                widget: image
+
+              - label: Google Play Badge
+                name: google_play_image
+                widget: image
+
+              - label: Background Image
+                name: background_image
+                widget: image
+
+              - label: Phone Mockup Image
+                name: phone_image
+                widget: image
+
+              - label: Phone Mockup Alt Text
+                name: phone_image_alt
+                widget: string
 
