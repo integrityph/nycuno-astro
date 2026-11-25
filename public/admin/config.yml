@@ -215,6 +215,7 @@ collections:
                   - label: "Icon"
                     name: "icon"
                     widget: "image"
+
       - name: about
         label: About Us
         file: src/content/pages/about.md
@@ -234,6 +235,7 @@ collections:
                   label: Paragraph
                   name: paragraph
                   widget: markdown
+
       - name: contact
         label: Contact Us
         file: src/content/pages/contact.md
@@ -264,6 +266,7 @@ collections:
                 name: email
                 widget: string
                 required: false
+
       - name: downloads
         label: Download Apps
         file: src/content/pages/downloads.md
@@ -308,3 +311,18 @@ collections:
                 name: phone_image_alt
                 widget: string
 
+      - name: privacy-policy
+        label: Privacy Policy
+        file: src/content/pages/privacy-policy.md
+        fields:
+          - label: Page Title
+            name: title
+            widget: string
+
+          - label: Page Description
+            name: description
+            widget: string
+
+          - label: Privacy Policy Content
+            name: body
+            widget: markdown

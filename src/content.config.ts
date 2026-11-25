@@ -171,9 +171,21 @@ const downloadPages = defineCollection({
   }),
 });
 
+const privacyPolicy = defineCollection({
+  loader: glob({
+    pattern: 'privacy-policy.md',
+    base: './src/content/pages',
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
 export const collections = {
   pages,
   aboutPages,
   contactPages,
-  downloadPages
+  downloadPages,
+  privacyPolicy 
 };

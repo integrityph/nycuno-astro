@@ -1,0 +1,34 @@
+---
+import '@/styles/global.css';
+import PrivacyPolicy from '@/components/privacy/PrivacyPolicy.astro';
+import { getEntry } from 'astro:content';
+
+const privacyPolicy = await getEntry('privacyPolicy', 'privacy-policy');
+
+if (!privacyPolicy) {
+  throw new Error('Privacy Policy content not found.');
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy Preview | NYCUNO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="m-0">
+    <PrivacyPolicy
+      title={privacyPolicy.data.title}
+      content={privacyPolicy.body ?? ''}
+    />
+  </body>
+</html>
