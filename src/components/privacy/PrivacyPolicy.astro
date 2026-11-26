@@ -30,9 +30,11 @@ const renderedContent = parsedContent.replace(
       class="
         space-y-6
         text-base font-normal leading-[26px] text-[#404040]
+        [&_h1]:font-heading [&_h1]:text-2xl [&_h1]:font-medium [&_h1]:text-text
         [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-medium [&_h2]:text-text
         [&_h3]:font-semibold [&_h3]:text-text
         [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-6
+        [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-6
         [&_strong]:font-semibold
       "
       data-key-path="body"
