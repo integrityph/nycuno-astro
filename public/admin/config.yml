@@ -315,6 +315,18 @@ collections:
             name: body
             widget: markdown
 
+      - name: how-it-works
+        label: How It Works
+        file: src/content/pages/how-it-works.md
+        fields:
+          - label: Page Heading
+            name: heading
+            widget: string
+
+          - label: How It Works Content
+            name: body
+            widget: markdown
+
       - name: privacy-policy
         label: Privacy Policy
         file: src/content/pages/privacy-policy.md

@@ -1,0 +1,38 @@
+---
+interface Props {
+  heading: string;
+  body: string;
+}
+
+const { heading, body } = Astro.props;
+---
+
+<main class="mx-auto w-full max-w-site flex-1 px-4 py-12.5 sm:px-6">
+  <section>
+    <h1
+      class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-none text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
+      data-reveal="up"
+      data-key-path="heading"
+    >
+      {heading}
+    </h1>
+
+    <div
+      class="
+        space-y-6
+        text-base font-normal leading-[26px] text-[#404040]
+        [&_h1]:font-heading [&_h1]:text-2xl [&_h1]:font-medium [&_h1]:text-text
+        [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-medium [&_h2]:text-text
+        [&_h3]:font-semibold [&_h3]:text-text
+        [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-6
+        [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-6
+        [&_strong]:font-semibold
+      "
+      data-key-path="body"
+      set:html={body.replace(
+        /<(h2|h3|p|ul|ol|li)(\s|>)/g,
+        '<$1 data-reveal="up"$2',
+      )}
+    />
+  </section>
+</main>

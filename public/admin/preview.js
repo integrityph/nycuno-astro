@@ -1041,6 +1041,126 @@ const LegalPreview = ({ entry, document: previewDocument }) => {
   `;
 };
 
+const HowItWorksPreview = ({ entry, document: previewDocument }) => {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const favicon = previewDocument.createElement('link');
+    favicon.rel = 'icon';
+    favicon.href = 'data:,';
+    previewDocument.head.appendChild(favicon);
+
+    const previewUrl = new URL(
+      '../preview/how-it-works/',
+      window.location.href,
+    );
+
+    async function loadPreview() {
+      try {
+        const response = await fetch(previewUrl);
+
+        if (!response.ok) {
+          throw new Error(`Preview request failed: ${response.status}`);
+        }
+
+        const htmlText = await response.text();
+        const parsedDocument = new DOMParser().parseFromString(
+          htmlText,
+          'text/html',
+        );
+
+        if (cancelled) return;
+
+        const root = previewDocument.getElementById(
+          'nycuno-how-it-works-preview-root',
+        );
+
+        if (!root) {
+          throw new Error('How It Works preview container was not found.');
+        }
+
+        previewDocument.body.className = parsedDocument.body.className;
+
+        parsedDocument.head
+          .querySelectorAll(
+            'link[rel="stylesheet"], link[rel="preconnect"], style',
+          )
+          .forEach((node) => {
+            const clone = previewDocument.importNode(node, true);
+
+            if (clone.tagName === 'LINK') {
+              const href = clone.getAttribute('href');
+
+              if (href) {
+                clone.href = new URL(href, previewUrl).href;
+              }
+            }
+
+            previewDocument.head.appendChild(clone);
+          });
+
+        root.innerHTML = parsedDocument.body.innerHTML;
+
+        setIsReady(true);
+      } catch (error) {
+        console.error('NYCUNO How It Works preview error:', error);
+
+        const root = previewDocument.getElementById(
+          'nycuno-how-it-works-preview-root',
+        );
+
+        if (root) {
+          root.textContent = 'Unable to load the How It Works preview.';
+        }
+      }
+    }
+
+    loadPreview();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [previewDocument]);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const heading = entry.getIn(['data', 'heading']);
+    const body = entry.getIn(['data', 'body']);
+
+    if (heading !== undefined) {
+      previewDocument
+        .querySelectorAll('[data-key-path="heading"]')
+        .forEach((element) => {
+          element.textContent = heading ?? '';
+        });
+    }
+
+    if (body !== undefined) {
+      const renderedBody = marked
+        .parse(body ?? '')
+        .replace(
+          /<(h2|h3|p|ul|ol|li)(\s|>)/g,
+          '<$1 data-reveal="up"$2',
+        );
+
+      previewDocument
+        .querySelectorAll('[data-key-path="body"]')
+        .forEach((element) => {
+          element.innerHTML = renderedBody;
+        });
+    }
+  }, [entry, isReady, previewDocument]);
+
+  return html`
+    <div id="nycuno-how-it-works-preview-root">
+      Loading NYCUNO How It Works preview...
+    </div>
+  `;
+};
+
 const PrivacyPolicyPreview = ({ entry, document: previewDocument }) => {
   const [isReady, setIsReady] = useState(false);
 
@@ -1159,4 +1279,5 @@ CMS.registerPreviewTemplate('about', AboutPreview);
 CMS.registerPreviewTemplate('contact', ContactPreview);
 CMS.registerPreviewTemplate('downloads', DownloadAppsPreview);
 CMS.registerPreviewTemplate('legal', LegalPreview);
+CMS.registerPreviewTemplate("how-it-works", HowItWorksPreview);
 CMS.registerPreviewTemplate('privacy-policy', PrivacyPolicyPreview);

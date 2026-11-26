@@ -1,0 +1,42 @@
+---
+import "@/styles/global.css";
+import HowItWorksContent from "@/components/how-it-works/HowItWorksContent.astro";
+import { getEntry } from "astro:content";
+
+const howItWorksPage = await getEntry(
+  "howItWorksPages",
+  "how-it-works",
+);
+
+if (!howItWorksPage) {
+  throw new Error('How it works content not found.');
+}
+
+const heading = howItWorksPage.data.heading;
+const body = howItWorksPage.body ?? "";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>How It Works Preview | NYCUNO</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <HowItWorksContent heading={heading} body={body} />
+  </body>
+</html>
