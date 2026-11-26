@@ -508,43 +508,32 @@ const AboutPreview = ({ entry, document: previewDocument }) => {
   useEffect(() => {
     if (!isReady) return;
 
-    const aboutIntro = entry.getIn(['data', 'about_intro'])?.toJS();
+    const heading = entry.getIn(['data', 'heading']);
+    const body = entry.getIn(['data', 'body']);
 
-    if (!aboutIntro) return;
+    // Update the page heading.
+    if (heading !== undefined) {
+      previewDocument
+        .querySelectorAll('[data-key-path="heading"]')
+        .forEach((element) => {
+          element.textContent = heading ?? '';
+        });
+    }
 
-    // Update the heading.
-    previewDocument
-      .querySelectorAll('[data-key-path="about_intro.heading"]')
-      .forEach((element) => {
-        element.textContent = aboutIntro.heading ?? '';
-      });
-
-    // Rebuild the paragraphs so adding and removing items works.
-    const paragraphsContainer = previewDocument.querySelector(
-      '[data-key-path="about_intro.paragraphs"]',
-    );
-
-    if (paragraphsContainer) {
-      paragraphsContainer.innerHTML = '';
-
-      (aboutIntro.paragraphs ?? []).forEach((paragraph, index) => {
-        const wrapper = previewDocument.createElement('div');
-
-        wrapper.className =
-          index === aboutIntro.paragraphs.length - 1
-            ? 'mb-0'
-            : 'mb-7';
-
-        wrapper.setAttribute('data-reveal', 'up');
-        wrapper.setAttribute(
-          'data-key-path',
-          `about_intro.paragraphs.${index}`,
+    // Update the Markdown body.
+    if (body !== undefined) {
+      const renderedBody = marked
+        .parse(body ?? '')
+        .replace(
+          /<(h2|h3|p|ul|ol|li)(\s|>)/g,
+          '<$1 data-reveal="up"$2',
         );
 
-        wrapper.innerHTML = marked.parse(paragraph ?? '');
-
-        paragraphsContainer.appendChild(wrapper);
-      });
+      previewDocument
+        .querySelectorAll('[data-key-path="body"]')
+        .forEach((element) => {
+          element.innerHTML = renderedBody;
+        });
     }
   }, [entry, isReady, previewDocument]);
 

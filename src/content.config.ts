@@ -126,10 +126,7 @@ const aboutPages = defineCollection({
     base: "./src/content/pages",
   }),
   schema: z.object({
-    about_intro: z.object({
-      heading: z.string(),
-      paragraphs: z.array(z.string()),
-    }),
+    heading: z.string(),
   }),
 });
 

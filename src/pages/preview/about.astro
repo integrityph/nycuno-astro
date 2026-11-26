@@ -2,19 +2,15 @@
 import '@/styles/global.css';
 import AboutIntro from '@/components/about/AboutIntro.astro';
 import { getEntry } from 'astro:content';
-import { marked } from 'marked';
 
 const aboutPage = await getEntry('aboutPages', 'about');
 
 if (!aboutPage) {
-  throw new Error('About Us content entry not found.');
+  throw new Error('About Us content not found.');
 }
 
-const { heading, paragraphs } = aboutPage.data.about_intro;
-
-const renderedParagraphs = await Promise.all(
-  paragraphs.map((paragraph) => marked.parse(paragraph))
-);
+const { heading } = aboutPage.data;
+const body = aboutPage.body ?? '';
 ---
 
 <!doctype html>
@@ -40,7 +36,7 @@ const renderedParagraphs = await Promise.all(
     <main>
       <AboutIntro
         heading={heading}
-        paragraphs={renderedParagraphs}
+        body={body}
       />
     </main>
   </body>

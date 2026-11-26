@@ -1,10 +1,10 @@
 ---
 interface Props {
   heading: string;
-  paragraphs: string[];
+  body: string;
 }
 
-const { heading, paragraphs } = Astro.props;
+const { heading, body } = Astro.props;
 ---
 
 <section class="bg-white px-0 py-[50px]">
@@ -12,25 +12,18 @@ const { heading, paragraphs } = Astro.props;
     <h1
       class="relative mb-7 pb-5 font-sans text-[35px] font-medium leading-none text-brand after:absolute after:bottom-0 after:left-0 after:h-px after:w-[50px] after:bg-brand"
       data-reveal="up"
-      data-key-path="about_intro.heading"
+      data-key-path="heading"
     >
       {heading}
     </h1>
 
-    <div 
-      class="text-base font-normal leading-[26px] text-[#404040]" 
-      data-key-path="about_intro.paragraphs"
-    >
-      {paragraphs.map((paragraph, index) => (
-        <div
-          class:list={[
-            index === paragraphs.length - 1 ? 'mb-0' : 'mb-7',
-          ]}
-          data-reveal="up"
-          data-key-path={`about_intro.paragraphs.${index}`}
-          set:html={paragraph}
-        />
-      ))}
-    </div>
+    <div
+      class="space-y-7 text-base font-normal leading-[26px] text-[#404040]"
+      data-key-path="body"
+      set:html={body.replace(
+        /<(h2|h3|p|ul|ol|li)(\s|>)/g,
+        '<$1 data-reveal="up"$2',
+      )}
+    />
   </div>
 </section>

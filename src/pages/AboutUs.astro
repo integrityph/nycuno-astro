@@ -10,11 +10,8 @@ if (!aboutPage) {
   throw new Error('About Us content not found.');
 }
 
-const { heading, paragraphs } = aboutPage.data.about_intro;
-
-const renderedParagraphs = await Promise.all(
-  paragraphs.map((paragraph) => marked.parse(paragraph))
-);
+const { heading } = aboutPage.data;
+const body = await marked.parse(aboutPage.body ?? '');
 ---
 
 <MainLayout
@@ -25,7 +22,7 @@ const renderedParagraphs = await Promise.all(
   <main>
     <AboutIntro
       heading={heading}
-      paragraphs={renderedParagraphs}
+      body={body}
     />
   </main>
 </MainLayout>
