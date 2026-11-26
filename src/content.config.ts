@@ -168,6 +168,16 @@ const downloadPages = defineCollection({
   }),
 });
 
+const legalPages = defineCollection({
+  loader: glob({
+    pattern: "legal.md",
+    base: "./src/content/pages",
+  }),
+  schema: z.object({
+    heading: z.string(),
+  }),
+});
+
 const privacyPolicy = defineCollection({
   loader: glob({
     pattern: 'privacy-policy.md',
@@ -184,5 +194,6 @@ export const collections = {
   aboutPages,
   contactPages,
   downloadPages,
+  legalPages,
   privacyPolicy 
 };

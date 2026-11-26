@@ -303,6 +303,18 @@ collections:
                 name: phone_image_alt
                 widget: string
 
+      - name: legal
+        label: Legal
+        file: src/content/pages/legal.md
+        fields:
+          - label: Page Heading
+            name: heading
+            widget: string
+
+          - label: Legal Content
+            name: body
+            widget: markdown
+
       - name: privacy-policy
         label: Privacy Policy
         file: src/content/pages/privacy-policy.md

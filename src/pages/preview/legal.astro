@@ -1,0 +1,34 @@
+---
+import '@/styles/global.css';
+import LegalContent from '@/components/legal/LegalContent.astro';
+import { getEntry } from 'astro:content';
+
+const legalPage = await getEntry('legalPages', 'legal');
+
+if (!legalPage) {
+  throw new Error('Legal content not found.');
+}
+
+const { heading } = legalPage.data;
+const body = legalPage.body ?? '';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NYCUNO — Legal Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="m-0">
+    <main>
+      <LegalContent heading={heading} body={body} />
+    </main>
+  </body>
+</html>
