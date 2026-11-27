@@ -178,6 +178,16 @@ const legalPages = defineCollection({
   }),
 });
 
+const termsConditionsPages = defineCollection({
+  loader: glob({
+    pattern: "terms-conditions.md",
+    base: "./src/content/pages",
+  }),
+  schema: z.object({
+    heading: z.string(),
+  }),
+});
+
 const howItWorksPages = defineCollection({
   loader: glob({
     pattern: "how-it-works.md",
@@ -217,5 +227,6 @@ export const collections = {
   legalPages,
   howItWorksPages,
   trustSafetyPages,
+  termsConditionsPages,
   privacyPolicy 
 };

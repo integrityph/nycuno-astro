@@ -315,6 +315,18 @@ collections:
             name: body
             widget: markdown
 
+      - name: terms-conditions
+        label: Terms & Conditions
+        file: src/content/pages/terms-conditions.md
+        fields:
+          - label: Page Heading
+            name: heading
+            widget: string
+
+          - label: Terms & Conditions Content
+            name: body
+            widget: markdown
+
       - name: how-it-works
         label: How It Works
         file: src/content/pages/how-it-works.md
