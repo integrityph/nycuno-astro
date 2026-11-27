@@ -327,6 +327,18 @@ collections:
             name: body
             widget: markdown
 
+      - name: trust-safety
+        label: Trust, Safety & Insurance
+        file: src/content/pages/trust-safety.md
+        fields:
+          - label: Page Heading
+            name: heading
+            widget: string
+
+          - label: Trust, Safety & Insurance Content
+            name: body
+            widget: markdown
+
       - name: privacy-policy
         label: Privacy Policy
         file: src/content/pages/privacy-policy.md

@@ -188,6 +188,16 @@ const howItWorksPages = defineCollection({
   }),
 });
 
+const trustSafetyPages = defineCollection({
+  loader: glob({
+    pattern: "trust-safety.md",
+    base: "./src/content/pages",
+  }),
+  schema: z.object({
+    heading: z.string(),
+  }),
+});
+
 const privacyPolicy = defineCollection({
   loader: glob({
     pattern: 'privacy-policy.md',
@@ -206,5 +216,6 @@ export const collections = {
   downloadPages,
   legalPages,
   howItWorksPages,
+  trustSafetyPages,
   privacyPolicy 
 };

@@ -1,0 +1,43 @@
+---
+import '@/styles/global.css';
+import TrustSafetyContent from '@/components/trust-safety/TrustSafetyContent.astro';
+import { getEntry } from 'astro:content';
+
+const trustSafetyPage = await getEntry('trustSafetyPages', 'trust-safety');
+
+if (!trustSafetyPage) {
+  throw new Error('Trust Safety content not found.');
+}
+
+const { heading } = trustSafetyPage.data;
+const body = trustSafetyPage.body ?? '';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NYCUNO — Trust, Safety & Insurance Preview</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="m-0">
+    <main>
+      <TrustSafetyContent
+        heading={heading}
+        body={body}
+      />
+    </main>
+  </body>
+</html>
