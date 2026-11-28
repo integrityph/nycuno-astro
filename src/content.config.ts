@@ -219,6 +219,16 @@ const privacyPolicy = defineCollection({
   }),
 });
 
+const helpCenterPages = defineCollection({
+  loader: glob({
+    pattern: "help-center.md",
+    base: "./src/content/pages",
+  }),
+  schema: z.object({
+    heading: z.string(),
+  }),
+});
+
 export const collections = {
   pages,
   aboutPages,
@@ -228,5 +238,6 @@ export const collections = {
   howItWorksPages,
   trustSafetyPages,
   termsConditionsPages,
-  privacyPolicy 
+  privacyPolicy, 
+  helpCenterPages
 };

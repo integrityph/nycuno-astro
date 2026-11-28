@@ -366,3 +366,15 @@ collections:
           - label: Privacy Policy Content
             name: body
             widget: markdown
+
+      - name: help-center
+        label: Help Center
+        file: src/content/pages/help-center.md
+        fields:
+          - label: Page Heading
+            name: heading
+            widget: string
+
+          - label: Help Center Content
+            name: body
+            widget: markdown
